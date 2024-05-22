@@ -1,0 +1,39 @@
+nav {
+    height: 15vh;
+}
+
+.nav-heading h3 {
+    font-size: 1.5rem;
+    font-weight: var(--w-sb);
+    color: var(--white);
+    margin: 0;
+    padding: 0;
+}
+
+.nav-end {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-end .buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+@media screen and (max-width: 480px) {
+    .buttons .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .nav-heading h3 {
+        font-size: 1.1rem;
+    }
+
+    .buttons .btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.7rem;
+    }
+}

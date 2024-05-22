@@ -1,0 +1,26 @@
+main .container.noauth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 85vh;
+}
+
+.gif {
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+}
+
+main h2 {
+    font-size: 2rem;
+    font-weight: var(--w-sb);
+    color: var(--white);
+    padding-bottom: 2rem;
+}
+
+main p {
+    font-size: 1.2rem;
+    font-weight: var(--w-m);
+    color: var(--white);
+    opacity: 0.7;
+}

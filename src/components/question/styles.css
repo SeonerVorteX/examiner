@@ -1,0 +1,86 @@
+.question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.question.finished {
+    border-top: 2px solid var(--primary);
+}
+
+.question.finished:first-child {
+    border-top: none;
+}
+
+.question .heading {
+    font-size: 1.5rem;
+    font-weight: var(--w-b);
+    margin-bottom: 1rem;
+    color: var(--white);
+    margin: 1rem 0 0 2rem;
+}
+
+.question .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.question .content .question-content img {
+    width: 100%;
+    height: 15rem;
+}
+
+.question .content .question-content p {
+    font-size: 1.5rem;
+    font-weight: var(--w-b);
+    color: var(--white);
+}
+
+.question .content .options ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 1rem;
+    list-style: none;
+}
+
+.question .content .options ul li {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.option-image {
+    width: 8rem;
+    height: 8rem;
+}
+
+.question .content .options ul .correct::before {
+    content: "✅";
+    font-size: 1.2rem;
+}
+
+.question .content .options ul .wrong::before {
+    content: "❌";
+    font-size: 1.2rem;
+}
+
+.question .content .options ul li img {
+    width: 4rem;
+    height: 4rem;
+}
+
+.question .content .options ul li label {
+    font-size: 1.3rem;
+    font-weight: var(--w-sb);
+    color: var(--white);
+}

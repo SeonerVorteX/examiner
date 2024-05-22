@@ -1,0 +1,83 @@
+.container.exam {
+    justify-content: center;
+}
+
+.errors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+    gap: 0.8rem;
+}
+
+.errors .error {
+    color: red;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.exam-container {
+    width: 100%;
+    min-height: 60vh;
+    background-color: var(--tertiary);
+    border: 2px solid var(--primary);
+    border-radius: 0.6rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.exam-container .exam-heading {
+    padding: 0.8rem;
+    background-color: var(--primary);
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: var(--w-m);
+    border-radius: 0.5rem 0.5rem 0 0;
+    text-align: center;
+}
+
+.exam-container .results {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.exam-container .results .result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.exam-container .results .result h3 {
+    font-size: 1.2rem;
+    font-weight: var(--w-sb);
+    color: var(--white);
+}
+
+.exam-container .results .result p {
+    font-size: 1.2rem;
+    font-weight: var(--w-m);
+    color: var(--white);
+    opacity: 0.8;
+}
+
+.exam-container .questions-heading {
+    padding: 0.8rem;
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: var(--w-m);
+    border-top: 2px solid var(--primary);
+    text-align: center;
+}
+
+.exam-container .questions {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}

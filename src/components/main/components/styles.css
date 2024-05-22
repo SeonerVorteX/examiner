@@ -1,0 +1,94 @@
+main .container.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+    width: 100%;
+}
+
+.app .search {
+    display: flex;
+    width: 100%;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.search .search-bar {
+    width: 100%;
+    padding: 0.8rem 3rem 0.8rem 1rem;
+    border-radius: 0.3rem;
+    background-color: var(--tertiary);
+    color: var(--white);
+    font-size: 1.2rem;
+}
+
+.search .search-bar:focus {
+    outline: 2px solid var(--secondary);
+}
+
+.search i {
+    font-size: 1.5rem;
+    color: var(--white);
+    position: absolute;
+    top: 25%;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.app .exams {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    width: 100%;
+}
+
+.app .exam {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    gap: 1.5rem;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 0.3rem;
+    border: 2px solid var(--secondary);
+    background-color: var(--tertiary);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.app .exams .exam:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.81);
+}
+
+.exam h3 {
+    font-size: 1.5rem;
+    font-weight: var(--w-sb);
+    text-align: center;
+}
+
+.exam p {
+    font-size: 1.2rem;
+    font-weight: var(--w-m);
+    opacity: 0.8;
+}
+
+.exam .get-exam {
+    padding: 0.5rem 1rem;
+    margin: auto;
+    font-size: 1rem;
+    font-weight: var(--w-m);
+    border-radius: 0.3rem;
+    background-color: var(--primary);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    outline: 1px solid var(--primary);
+}
+
+.exam .btn:hover {
+    background-color: var(--tertiary);
+}
