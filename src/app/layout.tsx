@@ -19,6 +19,14 @@ export const metadata: Metadata = {
         type: "website",
         url: "https://unec-examination.vercel.app",
         description: "Examination system for UNEC students",
+        images: [
+            {
+                url: "/Preview.png",
+                width: 800,
+                height: 600,
+                alt: "Preview Image",
+            },
+        ],
     },
     twitter: {
         card: "summary_large_image",
@@ -26,6 +34,14 @@ export const metadata: Metadata = {
         creator: "@SeonerVorteX",
         title: "Examination System",
         description: "Examination system for UNEC students",
+        images: [
+            {
+                url: "/Preview.png",
+                width: 800,
+                height: 600,
+                alt: "Preview Image",
+            },
+        ],
     },
 };
 
