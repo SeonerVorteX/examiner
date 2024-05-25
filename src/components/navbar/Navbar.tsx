@@ -18,7 +18,7 @@ interface NavbarProps {
 
 export default function Navbar({ props }: NavbarProps) {
     const { isAuthenticated, setIsAuthenticated, finishDate, timeOver } = props;
-    const [fullName, setFullName] = useState<string>("Profile");
+    const [fullName, setFullName] = useState<string>("Profil");
 
     const logout = () => {
         axios.get("/auth/logout").then((res) => {
@@ -77,7 +77,7 @@ export default function Navbar({ props }: NavbarProps) {
                     <div className="buttons">
                         <Link className="btn primary-btn" href="/login">
                             <i className="fa-solid fa-right-from-bracket"></i>{" "}
-                            Login
+                            Giriş
                         </Link>
                     </div>
                 )}

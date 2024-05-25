@@ -13,6 +13,20 @@ export const metadata: Metadata = {
         "Midterm",
     ],
     authors: [{ name: "Mehdi Safarzade", url: "https://mehdisafarzade.dev" }],
+    metadataBase: new URL("https://unec-examination.vercel.app"),
+    openGraph: {
+        title: "Examination System",
+        type: "website",
+        url: "https://mehdisafarzade.dev",
+        description: "Examination system for UNEC students",
+    },
+    twitter: {
+        card: "summary_large_image",
+        site: "@SeonerVorteX",
+        creator: "@SeonerVorteX",
+        title: "Examination System",
+        description: "Examination system for UNEC students",
+    },
 };
 
 export default function RootLayout({
