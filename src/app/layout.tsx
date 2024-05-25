@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Examination System",
         type: "website",
-        url: "https://mehdisafarzade.dev",
+        url: "https://unec-examination.vercel.app",
         description: "Examination system for UNEC students",
     },
     twitter: {
