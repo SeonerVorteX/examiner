@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "UNEC | Examination",
-    description: "Examination is a examination system for UNEC students.",
+    description: "Examination is an examination system for UNEC students.",
     keywords: [
         "Examination",
         "UNEC",
