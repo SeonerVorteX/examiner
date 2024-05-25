@@ -4,6 +4,13 @@
     justify-content: center;
 }
 
+.question.loading {
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .question.finished {
     border-top: 2px solid var(--primary);
 }
@@ -12,7 +19,7 @@
     border-top: none;
 }
 
-.question .heading {
+.question .question-heading {
     font-size: 1.5rem;
     font-weight: var(--w-b);
     margin-bottom: 1rem;
@@ -29,14 +36,23 @@
     margin-right: 2rem;
 }
 
-.question .content .question-content img {
-    width: 100%;
-    height: 15rem;
+.question .content .question-content .question-image {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.question .content .question-content p {
+.question .content .question-content .question-image h3 {
     font-size: 1.5rem;
     font-weight: var(--w-b);
+    color: var(--white);
+}
+
+.question .content .question-content .question-text {
+    font-size: 1.5rem;
+    font-weight: var(--w-b);
+    word-wrap: break-word;
     color: var(--white);
 }
 
@@ -59,11 +75,6 @@
     transition: background-color 0.3s;
 }
 
-.option-image {
-    width: 8rem;
-    height: 8rem;
-}
-
 .question .content .options ul .correct::before {
     content: "✅";
     font-size: 1.2rem;
@@ -74,13 +85,97 @@
     font-size: 1.2rem;
 }
 
-.question .content .options ul li img {
-    width: 4rem;
-    height: 4rem;
-}
-
 .question .content .options ul li label {
     font-size: 1.3rem;
     font-weight: var(--w-sb);
     color: var(--white);
+}
+
+@media screen and (max-width: 768px) {
+    .question .content .question-content .question-image h3 {
+        font-size: 1.2rem;
+    }
+
+    .question .content .question-content .question-image img {
+        max-width: 100%;
+    }
+
+    .question .content .question-content .question-text {
+        font-size: 1.1rem;
+    }
+
+    .question .content .options ul {
+        gap: 1rem;
+    }
+
+    .question .content .options ul li {
+        gap: 1rem;
+    }
+
+    .question .content .options ul li label {
+        font-size: 1.1rem;
+    }
+
+    .question .content .options ul li label img {
+        max-width: 100%;
+    }
+
+    .question .content .options ul .correct::before,
+    .question .content .options ul .wrong::before {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .question .content .question-content .question-image h3 {
+        font-size: 1rem;
+    }
+
+    .question .content .question-content .question-text {
+        font-size: 0.9rem;
+    }
+
+    .question .content .options ul {
+        gap: 0.8rem;
+    }
+
+    .question .content .options ul li {
+        gap: 0.8rem;
+    }
+
+    .question .content .options ul li label {
+        font-size: 0.9rem;
+    }
+
+    .question .content .options ul .correct::before,
+    .question .content .options ul .wrong::before {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .question .content .question-content .question-image h3 {
+        font-size: 0.8rem;
+    }
+
+    .question .content .question-content .question-text {
+        font-size: 0.8rem;
+    }
+
+    .question .content .options ul {
+        gap: 0.5rem;
+    }
+
+    .question .content .options ul li {
+        gap: 0.5rem;
+    }
+
+    .question .content .options ul li label {
+        font-size: 0.8rem;
+    }
+
+    .question .content .options ul .correct::before,
+    .question .content .options ul .wrong::before {
+        font-size: 0.7rem;
+    }
 }

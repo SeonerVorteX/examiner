@@ -69,12 +69,6 @@ main .container.app {
     text-align: center;
 }
 
-.exam p {
-    font-size: 1.2rem;
-    font-weight: var(--w-m);
-    opacity: 0.8;
-}
-
 .exam .get-exam {
     padding: 0.5rem 1rem;
     margin: auto;

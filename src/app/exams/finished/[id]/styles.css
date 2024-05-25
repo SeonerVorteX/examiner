@@ -42,7 +42,7 @@
     align-items: center;
     justify-content: space-evenly;
     gap: 1rem;
-    margin: 2rem 0;
+    margin: 1rem 0.2rem;
 }
 
 .exam-container .results .result {
@@ -56,12 +56,15 @@
     font-size: 1.2rem;
     font-weight: var(--w-sb);
     color: var(--white);
+    text-align: center;
 }
 
 .exam-container .results .result p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: var(--w-m);
     color: var(--white);
+    word-wrap: break-word;
+    text-align: center;
     opacity: 0.8;
 }
 
@@ -80,4 +83,54 @@
     justify-content: flex-start;
     gap: 1rem;
     margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .exam-container .exam-heading h2 {
+        font-size: 1.2rem;
+    }
+
+    .exam-container .results .result h3 {
+        font-size: 1rem;
+    }
+
+    .exam-container .questions-heading h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .exam-container .exam-heading h2 {
+        font-size: 1rem;
+    }
+
+    .exam-container .results .result h3 {
+        font-size: 0.8rem;
+    }
+
+    .exam-container .results .result p {
+        font-size: 0.8rem;
+    }
+
+    .exam-container .questions-heading h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .exam-container .exam-heading h2 {
+        font-size: 0.9rem;
+    }
+
+    .exam-container .results .result h3 {
+        font-size: 0.7rem;
+    }
+
+    .exam-container .results .result p {
+        font-size: 0.7rem;
+    }
+
+    .exam-container .questions-heading h2 {
+        font-size: 1.4rem;
+    }
 }

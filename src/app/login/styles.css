@@ -52,15 +52,15 @@ main.loginForm {
     border-color: var(--primary);
 }
 
-.form .errors {
+.form .auth-errors {
     list-style: none;
 }
 
-.form .errors.center li {
+.form .auth-errors.center li {
     text-align: center;
 }
 
-.form .errors li {
+.form .auth-errors li {
     color: var(--error);
     font-size: 0.9rem;
 }
@@ -109,11 +109,64 @@ main.loginForm {
     box-shadow: none !important;
 }
 
-@keyframes rotation {
-    0% {
-        transform: rotate(0deg);
+@media screen and (max-width: 768px) {
+    .form {
+        margin: 0rem 2rem;
     }
-    100% {
-        transform: rotate(360deg);
+
+    .form h1 {
+        font-size: 1.5rem;
+    }
+
+    .form label {
+        font-size: 1rem;
+    }
+
+    .form input {
+        font-size: 0.9rem;
+    }
+
+    .form .auth-errors li {
+        font-size: 0.8rem;
+    }
+
+    .form .submit {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .form {
+        margin: 0rem 1rem;
+    }
+
+    .form h1 {
+        font-size: 1.2rem;
+    }
+
+    .form label {
+        font-size: 0.9rem;
+    }
+
+    .form input {
+        font-size: 0.8rem;
+    }
+
+    .form .auth-errors li {
+        font-size: 0.7rem;
+    }
+
+    .form .submit {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .form h1 {
+        font-size: 1.1rem;
+    }
+
+    .form label {
+        font-size: 0.8rem;
     }
 }

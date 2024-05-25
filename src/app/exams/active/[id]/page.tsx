@@ -19,6 +19,9 @@ export default function ({ params }: { params: ActiveExamParms }) {
     const [errorList, setErrorList] = useState<APIError[]>([]);
     const [activeExam, setActiveExam] = useState<ActiveExam>();
     const [currentQuestion, setCurrentQuestion] = useState(1);
+    const [showAnswers, setShowAnswers] = useState(false);
+    const [showCurrentAnswer, setShowCurrentAnswer] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [answers, setAnswers] = useState<
         { question: number; index: number }[]
     >([]);
@@ -39,7 +42,11 @@ export default function ({ params }: { params: ActiveExamParms }) {
                             .then((res: AxiosResponse) => {
                                 if (res.status === 200) {
                                     setActiveExam(res.data);
+                                    setShowAnswers(
+                                        res.data.details.settings.showAnswer
+                                    );
                                     setAnswers(res.data.userAnswers);
+                                    document.title = `${res.data.details.title} | Examination`;
                                     setMounted(true);
                                 }
                             })
@@ -69,16 +76,61 @@ export default function ({ params }: { params: ActiveExamParms }) {
         }
     }, [answers]);
 
-    const submit = () => {
-        // ask for confirmation
-        if (confirm("İmtahanı bitirmək istədiyinizə əminsiniz mi?")) {
+    useEffect(() => {
+        if (showCurrentAnswer) {
+            let btn = document.querySelector(
+                ".showAnswer"
+            ) as HTMLButtonElement;
+            setShowCurrentAnswer(false);
+            btn.classList.remove("disabled");
+        }
+    }, [currentQuestion]);
+
+    const submit = (force?: boolean) => {
+        if (force) {
+            let btn = document.querySelector(".submit") as HTMLButtonElement;
+            btn.disabled = true;
+            btn.classList.add("disabled");
+            setIsLoading(true);
             axios
                 .get(`/exams/active/${examId}/finish`)
                 .then(() => {
                     window.location.href = `/exams/finished/${examId}`;
+                    setIsLoading(false);
+                    btn.disabled = false;
                 })
-                .catch(() => {});
+                .catch(() => {
+                    setIsLoading(false);
+                    btn.disabled = false;
+                });
+        } else if (confirm("İmtahanı bitirmək istədiyinizə əminsiniz mi?")) {
+            let btn = document.querySelector(".submit") as HTMLButtonElement;
+            btn.disabled = true;
+            btn.classList.add("disabled");
+            setIsLoading(true);
+            axios
+                .get(`/exams/active/${examId}/finish`)
+                .then(() => {
+                    window.location.href = `/exams/finished/${examId}`;
+                    setIsLoading(false);
+                    btn.disabled = false;
+                })
+                .catch(() => {
+                    setIsLoading(false);
+                    btn.disabled = false;
+                });
         }
+    };
+
+    const timeOver = () => {
+        alert("Vaxtınız bitdi!");
+        submit(true);
+    };
+
+    const showAnswer = () => {
+        let btn = document.querySelector(".showAnswer") as HTMLButtonElement;
+        setShowCurrentAnswer(true);
+        btn.classList.add("disabled");
     };
 
     if (!mounted) {
@@ -86,7 +138,14 @@ export default function ({ params }: { params: ActiveExamParms }) {
     } else {
         return (
             <>
-                <Navbar props={{ isAuthenticated, setIsAuthenticated }} />
+                <Navbar
+                    props={{
+                        isAuthenticated,
+                        setIsAuthenticated,
+                        finishDate: activeExam?.finishDate,
+                        timeOver,
+                    }}
+                />
                 <div className="container exam">
                     {!activeExam ? (
                         <div className="errors">
@@ -97,9 +156,10 @@ export default function ({ params }: { params: ActiveExamParms }) {
                             ))}
                         </div>
                     ) : (
-                        <div className="exam-container">
+                        <div className="active-exam-container">
                             <Question
                                 examId={examId}
+                                showAnswers={showCurrentAnswer}
                                 details={{
                                     _id: activeExam.details.questions[
                                         currentQuestion - 1
@@ -155,12 +215,32 @@ export default function ({ params }: { params: ActiveExamParms }) {
                                     </button>
                                 </div>
 
-                                <button
-                                    className="btn primary-btn submit"
-                                    onClick={submit}
-                                >
-                                    <i className="fa-solid fa-pencil"></i> Bitir
-                                </button>
+                                <div className="secondary-buttons">
+                                    {showAnswers ? (
+                                        <button
+                                            className="btn primary-btn showAnswer"
+                                            onClick={showAnswer}
+                                        >
+                                            <i className="fa-solid fa-lock-open"></i>{" "}
+                                            Cavabı göstər
+                                        </button>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    <button
+                                        className="btn primary-btn submit"
+                                        onClick={() => submit()}
+                                    >
+                                        {isLoading ? (
+                                            <span className="submit-btn-loader"></span>
+                                        ) : (
+                                            <>
+                                                <i className="fa-solid fa-pencil"></i>{" "}
+                                                Bitir
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )}

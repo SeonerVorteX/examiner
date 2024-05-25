@@ -13,12 +13,11 @@ interface QuestionProps {
         _id: string;
         index: number;
         row: number;
-        answer?: { question: ExamQuestion; index: number; _id: string };
     };
 }
 
 export default function Question(props: QuestionProps) {
-    const { index, row, answer } = props.details;
+    const { index, row } = props.details;
     const [examQuestion, setExamQuestion] = useState<QuestionType>();
     const [images, setImages] = useState<ImageType[]>([]);
     const [userAnswer, setUserAnswer] = useState<{
@@ -66,30 +65,25 @@ export default function Question(props: QuestionProps) {
             <article className="question finished">
                 {examQuestion ? (
                     <>
-                        {examQuestion.question.isImage ? (
-                            <div className="heading">
-                                <h1>{index}.</h1>
-                            </div>
-                        ) : (
-                            <></>
-                        )}
                         <div className="content">
                             <div className="question-content">
                                 {examQuestion.question.isImage ? (
-                                    <Image
-                                        src={convertBufferToBase64Image(
-                                            images.find(
-                                                (img) =>
-                                                    img.id ===
-                                                    examQuestion.question.value
-                                            )!.data.data
-                                        )}
-                                        alt="Question"
-                                        width={200}
-                                        height={200}
-                                    />
+                                    <div className="question-image">
+                                        <h3>{index}.</h3>
+                                        <img
+                                            src={convertBufferToBase64Image(
+                                                images.find(
+                                                    (img) =>
+                                                        img.id ===
+                                                        examQuestion.question
+                                                            .value
+                                                )!.data.data
+                                            )}
+                                            alt="Question"
+                                        />
+                                    </div>
                                 ) : (
-                                    <p>
+                                    <p className="question-text">
                                         {index}. {examQuestion.question.value}
                                     </p>
                                 )}
@@ -121,7 +115,7 @@ export default function Question(props: QuestionProps) {
                                                 />
                                                 <label htmlFor={option._id}>
                                                     {option.isImage ? (
-                                                        <Image
+                                                        <img
                                                             src={convertBufferToBase64Image(
                                                                 images.find(
                                                                     (img) =>
@@ -130,8 +124,6 @@ export default function Question(props: QuestionProps) {
                                                                 )!.data.data
                                                             )}
                                                             alt="Option"
-                                                            width={200}
-                                                            height={200}
                                                         />
                                                     ) : (
                                                         option.value

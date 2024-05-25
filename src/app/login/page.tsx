@@ -15,7 +15,7 @@ export default () => {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        document.title = "Giriş | Examer";
+        document.title = "Giriş | Examination";
 
         axios
             .get("/@me/verifyToken")
@@ -47,7 +47,9 @@ export default () => {
 
     const submit = () => {
         setApiErrors([]);
-        const submitButton = document.querySelector(".submit");
+        const submitButton = document.querySelector(
+            ".submit"
+        ) as HTMLButtonElement;
 
         const username = document.getElementById(
             "username"
@@ -69,6 +71,7 @@ export default () => {
         }
 
         submitButton!.classList.add("loading");
+        submitButton!.disabled = true;
         setIsLoading(true);
 
         axios
@@ -78,7 +81,7 @@ export default () => {
             })
             .then((res) => {
                 setIsLoading(false);
-
+                submitButton!.disabled = false;
                 if (res.status === 200) {
                     const { user } = res.data as { user: UserPayload };
                     localStorage.setItem("user", JSON.stringify(user));
@@ -90,6 +93,7 @@ export default () => {
             .catch(({ response }) => {
                 setIsLoading(false);
                 submitButton!.classList.remove("loading");
+                submitButton!.disabled = false;
                 const errorList = getErrors(response!);
                 setApiErrors(errorList);
             });
@@ -103,7 +107,7 @@ export default () => {
                 <div className="form">
                     <h1>Kabinetinə Giriş Et</h1>
                     {apiErrors.length > 0 ? (
-                        <ul className="errors center">
+                        <ul className="auth-errors center">
                             {apiErrors.map((error, i) => (
                                 <li key={i}>{error.message}</li>
                             ))}
@@ -128,7 +132,7 @@ export default () => {
                             className={`${passwordValid ? "" : "invalid"}`}
                             required
                         />
-                        <a
+                        <button
                             className={`submit ${
                                 usernameValid && passwordValid
                                     ? ""
@@ -141,7 +145,7 @@ export default () => {
                             ) : (
                                 "Giriş Et"
                             )}
-                        </a>
+                        </button>
                     </form>
                 </div>
             </main>

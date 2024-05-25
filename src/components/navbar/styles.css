@@ -20,20 +20,30 @@ nav {
     gap: 0.5rem;
 }
 
+@media screen and (max-width: 768px) {
+    .nav-heading h3 {
+        font-size: 1.3rem;
+    }
+
+    .nav-end .buttons .btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
 @media screen and (max-width: 480px) {
-    .buttons .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
+    .nav-heading h3 {
+        font-size: 0.9rem;
+    }
+
+    .nav-end .buttons .btn {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.7rem;
     }
 }
 
 @media screen and (max-width: 340px) {
-    .nav-heading h3 {
-        font-size: 1.1rem;
-    }
-
-    .buttons .btn {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.7rem;
+    .nav-end .buttons .profile-btn {
+        display: none;
     }
 }

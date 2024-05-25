@@ -35,6 +35,7 @@ export default function ({ params }: { params: FinishedExamParms }) {
                             .then((res: AxiosResponse) => {
                                 if (res.status === 200) {
                                     setFinishedExam(res.data);
+                                    document.title = `${res.data.details.title} | Nəticə | Examination`;
                                     setMounted(true);
                                 }
                             })
@@ -107,7 +108,7 @@ export default function ({ params }: { params: FinishedExamParms }) {
                                                 finishedExam.details.settings
                                                     .questionCount
                                             }{" "}
-                                            {`(${finishedExam.results.score}%)`}
+                                            {`(${finishedExam.results.scorePercent}%)`}
                                         </p>
                                     </div>
                                 </div>
@@ -125,11 +126,6 @@ export default function ({ params }: { params: FinishedExamParms }) {
                                                 _id: question._id,
                                                 row: question.row,
                                                 index: index + 1,
-                                                answer: finishedExam.results.answers.find(
-                                                    (q) =>
-                                                        q.question.row ===
-                                                        question.row
-                                                ),
                                             }}
                                         />
                                     )

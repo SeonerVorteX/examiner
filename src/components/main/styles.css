@@ -24,3 +24,28 @@ main p {
     color: var(--white);
     opacity: 0.7;
 }
+
+@media screen and (max-width: 768px) {
+    .noauth h2 {
+        font-size: 1.8rem;
+    }
+
+    .noauth p {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .noauth h2 {
+        font-size: 1.5rem;
+    }
+
+    .noauth p {
+        font-size: 0.9rem;
+    }
+
+    .noauth .gif {
+        padding-top: 2rem;
+        transform: scale(0.8);
+    }
+}

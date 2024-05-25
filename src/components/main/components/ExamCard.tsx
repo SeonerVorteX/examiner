@@ -17,7 +17,6 @@ export default ({ id, title, url }: ExamCardProps) => {
             <Link href={url} target="_blank">
                 <h3>{title}</h3>
             </Link>
-            {/* <p className={`description-${id}`}>{description}</p> */}
             <Link className="btn primary-btn get-exam" href={url}>
                 <i className="fa-solid fa-pen"></i> İmtahana Ver
             </Link>

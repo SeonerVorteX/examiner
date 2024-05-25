@@ -22,6 +22,7 @@ export default function Exam({ params }: { params: ExamParms }) {
     const [startPointValid, setStartPointValid] = useState<boolean>(true);
     const [endPointValid, setEndPointValid] = useState<boolean>(true);
     const [showAnswer, setShowAnswer] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [mounted, setMounted] = useState(false);
     const examId = params.id;
 
@@ -40,6 +41,7 @@ export default function Exam({ params }: { params: ExamParms }) {
                                 if (res.status === 200) {
                                     setExam(res.data);
                                     setEndPoint(res.data.questionCount);
+                                    document.title = `${res.data.title} - İmtahan`;
                                     setMounted(true);
                                 }
                             })
@@ -101,6 +103,11 @@ export default function Exam({ params }: { params: ExamParms }) {
         if (startPointValid && endPointValid) {
             let questionCount = 50;
 
+            let btn = document.querySelector(".startExam") as HTMLButtonElement;
+            btn.disabled = true;
+            btn.classList.add("disabled");
+            setIsLoading(true);
+
             if (
                 parseInt(endPoint!) - parseInt(startPoint) + 1 <
                 questionCount
@@ -117,12 +124,16 @@ export default function Exam({ params }: { params: ExamParms }) {
                 })
                 .then((res: AxiosResponse) => {
                     if (res.status === 200) {
+                        setIsLoading(false);
                         window.location.href = `/exams/active/${res.data.id}`;
                     }
                 })
                 .catch(({ response }: AxiosError) => {
                     let errorList = getErrors(response!);
                     setErrorList(errorList);
+                    setIsLoading(false);
+                    btn.disabled = false;
+                    btn.classList.remove("disabled");
                 });
         }
     };
@@ -168,7 +179,7 @@ export default function Exam({ params }: { params: ExamParms }) {
                                                 <input
                                                     type="checkbox"
                                                     name="showAnswer"
-                                                    className="showAnswer"
+                                                    className="showAnswerBox"
                                                     onChange={() =>
                                                         setShowAnswer(
                                                             !showAnswer
@@ -207,7 +218,9 @@ export default function Exam({ params }: { params: ExamParms }) {
                                                         handleIntervalChange
                                                     }
                                                 />
-                                                aralığından 50 sual
+                                                <span className="interval-msg">
+                                                    aralığından 50 sual
+                                                </span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -221,7 +234,11 @@ export default function Exam({ params }: { params: ExamParms }) {
                                         }`}
                                         onClick={startExam}
                                     >
-                                        Başla
+                                        {isLoading ? (
+                                            <span className="start-exam-btn-loader"></span>
+                                        ) : (
+                                            "Başla"
+                                        )}
                                     </button>
                                 </div>
                             </div>

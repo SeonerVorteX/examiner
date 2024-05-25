@@ -1,0 +1,38 @@
+.timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer h3 {
+    font-size: 1.3rem;
+    font-weight: var(--w-b);
+    color: var(--white);
+}
+
+.timer h3 span {
+    color: var(--warning);
+    font-variant-numeric: tabular-nums;
+}
+
+.timer h3 span.danger {
+    color: var(--error);
+}
+
+@media screen and (max-width: 768px) {
+    .timer h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .timer h3 {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .timer h3 {
+        font-size: 0.9rem;
+    }
+}

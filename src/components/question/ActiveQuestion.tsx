@@ -5,10 +5,10 @@ import axios from "@/utils/axios";
 import { useEffect, useState } from "react";
 import { ImageType, QuestionType } from "@/types/types";
 import Loading from "@/app/loading";
-import Image from "next/image";
 
 interface QuestionProps {
     examId: string;
+    showAnswers: boolean;
     details: {
         _id: string;
         index: number;
@@ -21,8 +21,15 @@ interface QuestionProps {
 }
 
 export default function ActiveQuestion(props: QuestionProps) {
+    const { showAnswers } = props;
     const { index, row, answers, setAnswers } = props.details;
     const [examQuestion, setExamQuestion] = useState<QuestionType>();
+    const [cachedQuestions, setCachedQuestions] = useState<
+        {
+            question: QuestionType;
+            images: ImageType[];
+        }[]
+    >([]);
     const [images, setImages] = useState<ImageType[]>([]);
     const [answer, setAnswer] = useState<number>(-1);
     const [mounted, setMounted] = useState(false);
@@ -34,27 +41,42 @@ export default function ActiveQuestion(props: QuestionProps) {
     };
 
     useEffect(() => {
-        axios
-            .get(`/exams/active/${examId}/questions/${row}`)
-            .then((res) => {
-                const { question, images } = res.data as {
-                    question: QuestionType;
-                    images: ImageType[];
-                };
-                if (answers.find((ans) => ans.question === row)) {
-                    setAnswer(
-                        answers.find((ans) => ans.question === row)!.index
-                    );
-                } else {
-                    setAnswer(-1);
-                }
-                setExamQuestion(question);
-                setImages(images);
-                setMounted(true);
-            })
-            .catch(() => {
-                setMounted(true);
-            });
+        setMounted(false);
+        let cachedQuestion = cachedQuestions.find(
+            (q) => q.question.row === row
+        );
+
+        if (cachedQuestion) {
+            setExamQuestion(cachedQuestion.question);
+            setImages(cachedQuestion.images);
+            setMounted(true);
+        } else {
+            axios
+                .get(`/exams/active/${examId}/questions/${row}`)
+                .then((res) => {
+                    const { question, images } = res.data as {
+                        question: QuestionType;
+                        images: ImageType[];
+                    };
+                    if (answers.find((ans) => ans.question === row)) {
+                        setAnswer(
+                            answers.find((ans) => ans.question === row)!.index
+                        );
+                    } else {
+                        setAnswer(-1);
+                    }
+                    setExamQuestion(question);
+                    setImages(images);
+                    setMounted(true);
+                    setCachedQuestions([
+                        ...cachedQuestions,
+                        { question, images },
+                    ]);
+                })
+                .catch(() => {
+                    setMounted(true);
+                });
+        }
     }, [index]);
 
     useEffect(() => {
@@ -66,23 +88,21 @@ export default function ActiveQuestion(props: QuestionProps) {
     }, [answer]);
 
     if (!mounted) {
-        return <Loading />;
+        return (
+            <article className="question loading">
+                <Loading />;
+            </article>
+        );
     } else {
         return (
             <article className="question">
                 {examQuestion ? (
-                    <>
-                        {examQuestion.question.isImage ? (
-                            <div className="heading">
-                                <h1>{index}.</h1>
-                            </div>
-                        ) : (
-                            <></>
-                        )}
-                        <div className="content">
-                            <div className="question-content">
-                                {examQuestion.question.isImage ? (
-                                    <Image
+                    <div className="content">
+                        <div className="question-content">
+                            {examQuestion.question.isImage ? (
+                                <div className="question-image">
+                                    <h3>{index}.</h3>
+                                    <img
                                         src={convertBufferToBase64Image(
                                             images.find(
                                                 (img) =>
@@ -91,62 +111,67 @@ export default function ActiveQuestion(props: QuestionProps) {
                                             )!.data.data
                                         )}
                                         alt="Question"
-                                        width={200}
-                                        height={200}
                                     />
-                                ) : (
-                                    <p>
-                                        {index}. {examQuestion.question.value}
-                                    </p>
-                                )}
-                            </div>
-                            <div className="options">
-                                <ul>
-                                    {examQuestion.options.map((option) => (
-                                        <li key={option._id}>
-                                            <input
-                                                type="radio"
-                                                name="option"
-                                                id={option._id}
-                                                checked={
-                                                    answer ===
+                                </div>
+                            ) : (
+                                <p className="question-text">
+                                    {index}. {examQuestion.question.value}
+                                </p>
+                            )}
+                        </div>
+                        <div className="options">
+                            <ul>
+                                {examQuestion.options.map((option, _index) => (
+                                    <li
+                                        key={_index}
+                                        className={
+                                            showAnswers
+                                                ? option.isCorrect
+                                                    ? "correct"
+                                                    : "wrong"
+                                                : ""
+                                        }
+                                    >
+                                        <input
+                                            type="radio"
+                                            name="option"
+                                            key={_index}
+                                            checked={
+                                                answer ===
+                                                examQuestion.options.indexOf(
+                                                    option
+                                                )
+                                            }
+                                            onClick={() =>
+                                                setAnswer(
                                                     examQuestion.options.indexOf(
                                                         option
                                                     )
-                                                }
-                                                onClick={() =>
-                                                    setAnswer(
-                                                        examQuestion.options.indexOf(
-                                                            option
-                                                        )
-                                                    )
-                                                }
-                                            />
-                                            <label htmlFor={option._id}>
-                                                {option.isImage ? (
-                                                    <Image
-                                                        className="option-image"
-                                                        src={convertBufferToBase64Image(
-                                                            images.find(
-                                                                (img) =>
-                                                                    img.id ===
-                                                                    option.value
-                                                            )!.data.data
-                                                        )}
-                                                        alt="Option"
-                                                        width={200}
-                                                        height={200}
-                                                    />
-                                                ) : (
-                                                    option.value
-                                                )}
-                                            </label>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                                                )
+                                            }
+                                        />
+                                        <label htmlFor={option._id}>
+                                            {option.isImage ? (
+                                                <img
+                                                    className="option-image"
+                                                    src={convertBufferToBase64Image(
+                                                        images.find(
+                                                            (img) =>
+                                                                img.id ===
+                                                                option.value
+                                                        )!.data.data
+                                                    )}
+                                                    alt="Option"
+                                                />
+                                            ) : (
+                                                option.value
+                                            )}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                    </>
+                    </div>
                 ) : (
                     <p>Question not found</p>
                 )}

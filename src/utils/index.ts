@@ -15,7 +15,8 @@ export const getToken = () => {
 };
 
 export const getErrors = (res: AxiosResponse) => {
-    let errors = res.data.errors as { [key: string]: APIError | APIError[] };
+    let errors =
+        (res.data.errors as { [key: string]: APIError | APIError[] }) || {};
     let errorList = [] as APIError[];
     let apiErrors = new Object(APIErrors) as { [key: string]: { az: string } };
 

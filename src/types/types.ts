@@ -1,7 +1,9 @@
 export interface UserPayload {
     _id: string;
     email: string;
-    fullName: string;
+    fullname: string;
+    group: string;
+    groupNames: string;
     accessToken: string;
 }
 

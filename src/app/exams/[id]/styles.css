@@ -75,12 +75,12 @@ input[type="text"].qinput {
     padding: 0.5rem;
 }
 
-.showAnswer {
+.showAnswerBox {
     width: 1.2rem;
     height: 1.2rem;
 }
 
-.showAnswer:hover {
+.showAnswerBox:hover {
     cursor: pointer;
     box-shadow: 0 0 5px 0 var(--primary);
 }
@@ -96,6 +96,29 @@ input[type="text"].qinput {
     font-size: 1.2rem;
     font-weight: var(--w-sb);
     transition: all 0.3s ease;
+}
+
+.start-exam-btn-loader {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 3px solid #fff;
+    border-right: 3px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    z-index: 1000;
+}
+
+.startExam.disabled {
+    cursor: not-allowed;
+    background-color: var(--disabled-primary);
+    color: var(--disabled-white);
+}
+
+.startExam.disabled:hover {
+    background-color: var(--disabled-primary);
+    box-shadow: none;
 }
 
 .invalid {
@@ -116,4 +139,140 @@ input[type="text"].qinput {
 
 .btn-invalid:hover {
     box-shadow: none !important;
+}
+
+@media screen and (max-width: 768px) {
+    .exam-container {
+        width: 90%;
+    }
+
+    .exam-container .heading h2 {
+        font-size: 1.2rem;
+    }
+
+    .exam-table table {
+        width: 90%;
+        max-width: 90%;
+    }
+
+    .exam-table table tr td:first-child {
+        width: 40%;
+        font-size: 1rem;
+    }
+
+    .exam-table table tr td {
+        padding: 0.8rem 0;
+    }
+
+    .exam-table table tr td:last-child {
+        padding-left: 1.5rem;
+        font-size: 1rem;
+    }
+
+    .questionInterval {
+        gap: 1rem;
+    }
+
+    .questionInterval .interval-msg {
+        font-size: 0.9rem;
+    }
+
+    .questionInterval input[type="text"].qinput {
+        width: 2.5rem;
+    }
+
+    .showAnswerBox {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .exam-container {
+        width: 95%;
+        min-height: auto;
+    }
+
+    .exam-container .heading h2 {
+        font-size: 1rem;
+    }
+
+    .exam-table table {
+        width: 95%;
+        max-width: 95%;
+    }
+
+    .exam-table table tr td:first-child {
+        width: 50%;
+        font-size: 0.8rem;
+    }
+
+    .exam-table table tr td {
+        padding: 0.6rem 0;
+    }
+
+    .exam-table table tr td:last-child {
+        padding-left: 1.5rem;
+        font-size: 0.8rem;
+    }
+
+    .questionInterval {
+        gap: 0.8rem;
+    }
+
+    .questionInterval .interval-msg {
+        font-size: 0.6rem;
+        margin-right: 0.5rem;
+    }
+
+    .showAnswerBox {
+        width: 0.8rem;
+        height: 0.8rem;
+    }
+
+    .startExam {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .exam-container .heading h2 {
+        font-size: 0.8rem;
+    }
+
+    .exam-table table tr td:first-child {
+        width: 60%;
+        font-size: 0.7rem;
+    }
+
+    .exam-table table tr td {
+        padding: 0.5rem 0;
+    }
+
+    .exam-table table tr td:last-child {
+        padding-left: 1.5rem;
+        font-size: 0.7rem;
+    }
+
+    .questionInterval .interval-msg {
+        font-size: 0.5rem;
+        margin-right: 0.3rem;
+    }
+
+    .questionInterval input[type="text"].qinput {
+        width: 2rem;
+    }
+
+    .showAnswerBox {
+        width: 0.6rem;
+        height: 0.6rem;
+    }
+
+    .startExam {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.6rem;
+        margin-bottom: 0rem;
+    }
 }
