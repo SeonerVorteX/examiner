@@ -1,5 +1,6 @@
 .container.exam {
     justify-content: center;
+    max-width: 900px;
 }
 
 .errors {
@@ -80,11 +81,6 @@ input[type="text"].qinput {
     height: 1.2rem;
 }
 
-.showAnswerBox:hover {
-    cursor: pointer;
-    box-shadow: 0 0 5px 0 var(--primary);
-}
-
 .startExam {
     margin: 1rem auto;
     padding: 0.8rem 1.6rem;
@@ -116,11 +112,6 @@ input[type="text"].qinput {
     color: var(--disabled-white);
 }
 
-.startExam.disabled:hover {
-    background-color: var(--disabled-primary);
-    box-shadow: none;
-}
-
 .invalid {
     border: 1px solid red;
 }
@@ -128,7 +119,6 @@ input[type="text"].qinput {
 .exam-buttons {
     display: flex;
     justify-content: center;
-    margin-bottom: 1.5rem;
 }
 
 .btn-invalid {
@@ -137,8 +127,20 @@ input[type="text"].qinput {
     background-color: var(--disabled-primary) !important;
 }
 
-.btn-invalid:hover {
-    box-shadow: none !important;
+@media (hover: hover) and (pointer: fine) {
+    .showAnswerBox:hover {
+        cursor: pointer;
+        box-shadow: 0 0 5px 0 var(--primary);
+    }
+
+    .startExam.disabled:hover {
+        background-color: var(--disabled-primary);
+        box-shadow: none;
+    }
+
+    .btn-invalid:hover {
+        box-shadow: none !important;
+    }
 }
 
 @media screen and (max-width: 768px) {

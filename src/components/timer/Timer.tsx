@@ -10,6 +10,9 @@ export default function Timer(props: TimerProps) {
     const { finishDate, timeOver } = props;
     const [danger, setDanger] = useState<boolean>(false);
     const [finished, setFinished] = useState<boolean>(false);
+    const [examInterval, setExamInterval] = useState<NodeJS.Timeout | null>(
+        null
+    );
     const [timeLeft, setTimeLeft] = useState<number>(finishDate - Date.now());
 
     const formatTime = (time: number) => {
@@ -21,6 +24,17 @@ export default function Timer(props: TimerProps) {
     };
 
     useEffect(() => {
+        const interval = setInterval(() => {
+            if (!finished)
+                setTimeLeft(
+                    finishDate - Date.now() > 0 ? finishDate - Date.now() : 0
+                );
+        }, 1000);
+
+        setExamInterval(interval);
+    }, []);
+
+    useEffect(() => {
         if (finished) return;
 
         if (timeLeft < 15 * 60 * 1000) {
@@ -30,18 +44,11 @@ export default function Timer(props: TimerProps) {
         if (finishDate - Date.now() <= 0) {
             timeOver();
             setFinished(true);
-            clearInterval(interval);
+            clearInterval(examInterval!);
         } else {
             setTimeLeft(finishDate - Date.now());
         }
     }, [timeLeft]);
-
-    const interval = setInterval(() => {
-        if (!finished)
-            setTimeLeft(
-                finishDate - Date.now() > 0 ? finishDate - Date.now() : 0
-            );
-    }, 1000);
 
     return (
         <div className="timer">

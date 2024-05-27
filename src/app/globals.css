@@ -98,10 +98,6 @@ a {
     background-color: var(--primary);
 }
 
-.primary-btn:hover {
-    box-shadow: 0 0 5px 0 var(--primary);
-}
-
 .secondary-btn {
     color: var(--white);
     border: 1px solid var(--primary);
@@ -109,10 +105,6 @@ a {
 
 .tertiary-btn {
     color: var(--white);
-}
-
-.tertiary-btn:hover {
-    color: var(--primary);
 }
 
 .loader-container {
@@ -154,4 +146,14 @@ a {
 
 ::-webkit-scrollbar-thumb {
     background: var(--primary);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .primary-btn:hover {
+        box-shadow: 0 0 5px 0 var(--primary);
+    }
+
+    .tertiary-btn:hover {
+        color: var(--primary);
+    }
 }

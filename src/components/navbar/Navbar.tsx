@@ -55,22 +55,28 @@ export default function Navbar({ props }: NavbarProps) {
                                 timeOver={timeOver!}
                             />
                         ) : (
-                            <div className="buttons">
-                                <a
-                                    className="btn tertiary-btn"
-                                    onClick={logout}
-                                >
-                                    <i className="fa-solid fa-right-from-bracket"></i>{" "}
-                                    Logout
-                                </a>
-                                <Link
-                                    className="btn primary-btn profile-btn"
-                                    href="/profile"
-                                >
-                                    <i className="fa-solid fa-user"></i>{" "}
-                                    {fullName}
-                                </Link>
-                            </div>
+                            <>
+                                <input type="checkbox" id="check" />
+                                <label htmlFor="check" className="checkbtn">
+                                    <i className="fas fa-bars"></i>
+                                </label>
+                                <div className="buttons menu">
+                                    <a
+                                        className="btn tertiary-btn"
+                                        onClick={logout}
+                                    >
+                                        <i className="fa-solid fa-right-from-bracket"></i>{" "}
+                                        Logout
+                                    </a>
+                                    <Link
+                                        className="btn primary-btn profile-btn"
+                                        href="/profile"
+                                    >
+                                        <i className="fa-solid fa-user"></i>{" "}
+                                        {fullName}
+                                    </Link>
+                                </div>
+                            </>
                         )}
                     </>
                 ) : (

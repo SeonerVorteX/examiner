@@ -20,30 +20,73 @@ nav {
     gap: 0.5rem;
 }
 
+.nav-end .buttons .btn {
+    text-align: center;
+}
+
+.nav-end .checkbtn {
+    font-size: 2rem;
+    color: var(--white);
+    cursor: pointer;
+    display: none;
+}
+
+.nav-end #check {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
+    nav {
+        height: 10vh;
+    }
+
+    .nav-end .checkbtn {
+        display: block;
+        order: 1;
+    }
+
+    .nav-end .menu {
+        position: fixed;
+        padding: 3rem 0rem;
+        top: -100%;
+        right: 0;
+        background-color: var(--black);
+        border: 1px solid var(--primary);
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        transition: all 0.5s ease-in-out;
+        z-index: 1;
+    }
+
+    .nav-end #check:checked ~ .buttons {
+        top: 5rem;
+    }
+
     .nav-heading h3 {
         font-size: 1.3rem;
     }
 
     .nav-end .buttons .btn {
         padding: 0.8rem 1.2rem;
-        font-size: 0.9rem;
+        font-size: 1.2rem;
     }
 }
 
 @media screen and (max-width: 480px) {
+    .nav-end .checkbtn {
+        font-size: 1.5rem;
+    }
+
     .nav-heading h3 {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
     }
 
     .nav-end .buttons .btn {
-        padding: 0.5rem 0.7rem;
-        font-size: 0.7rem;
-    }
-}
-
-@media screen and (max-width: 340px) {
-    .nav-end .buttons .profile-btn {
-        display: none;
+        padding: 0.6rem 0.8rem;
+        font-size: 1rem;
     }
 }

@@ -77,10 +77,6 @@ main.loginForm {
     cursor: pointer;
 }
 
-.form .submit:hover {
-    background: var(--primary-hover);
-}
-
 .submit.loading {
     background: var(--primary);
     color: var(--white);
@@ -105,8 +101,13 @@ main.loginForm {
     background-color: var(--disabled-primary) !important;
 }
 
-.btn-invalid:hover {
-    box-shadow: none !important;
+@media (hover: hover) and (pointer: fine) {
+    .form .submit:hover {
+        background: var(--primary-hover);
+    }
+    .btn-invalid:hover {
+        box-shadow: none !important;
+    }
 }
 
 @media screen and (max-width: 768px) {

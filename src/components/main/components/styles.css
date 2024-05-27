@@ -58,11 +58,6 @@ main .container.app {
     transition: all 0.5s ease;
 }
 
-.app .exams .exam:hover {
-    transform: translateY(-0.5rem);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.81);
-}
-
 .exam h3 {
     font-size: 1.5rem;
     font-weight: var(--w-sb);
@@ -83,6 +78,31 @@ main .container.app {
     outline: 1px solid var(--primary);
 }
 
-.exam .btn:hover {
-    background-color: var(--tertiary);
+@media (hover: hover) and (pointer: fine) {
+    .app .exams .exam:hover {
+        transform: translateY(-0.5rem);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.81);
+    }
+
+    .exam .btn:hover {
+        background-color: var(--tertiary);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .app .header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .app .header h2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .app .header h2 {
+        font-size: 1.1rem;
+    }
 }

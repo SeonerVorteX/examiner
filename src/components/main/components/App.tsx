@@ -1,16 +1,20 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import "./styles.css";
 import ExamCard from "./ExamCard";
-import { Exam } from "@/types/types";
+import { Exam, UserPayload } from "@/types/types";
 import { API as $ } from "@/utils";
 import Loading from "@/app/loading";
 import axios from "@/utils/axios";
 
 export default () => {
     const [exams, setExams] = useState<Exam[]>([]);
+    const [group, setGroup] = useState<string>("");
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        let user: UserPayload = JSON.parse(localStorage.getItem("user")!);
+        setGroup(user.group);
+
         axios.get("/exams/all").then((res) => {
             if (res.status === 200) {
                 setExams(res.data);
@@ -26,19 +30,23 @@ export default () => {
     return (
         <div className="container app">
             <div className="header">
-                <h2>Aktif İmtahanlar</h2>
+                <h2>{group} qrupu üçün aktif imtahanlar:</h2>
             </div>
 
-            <div className="exams">
-                {exams.map((exam, index) => (
-                    <ExamCard
-                        id={exam.id}
-                        title={exam.title}
-                        url={`/exams/${exam.id}`}
-                        key={index}
-                    />
-                ))}
-            </div>
+            {exams.length > 0 ? (
+                <div className="exams">
+                    {exams.map((exam, index) => (
+                        <ExamCard
+                            id={exam.id}
+                            title={exam.title}
+                            url={`/exams/${exam.id}`}
+                            key={index}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <h3 className="no-exam">Aktiv imtahan yoxdur</h3>
+            )}
         </div>
     );
 };

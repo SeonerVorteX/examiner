@@ -47,6 +47,8 @@ export default function ActiveQuestion(props: QuestionProps) {
         );
 
         if (cachedQuestion) {
+            let answer = answers.find((ans) => ans.question === row);
+            setAnswer(answer ? answer.index : -1);
             setExamQuestion(cachedQuestion.question);
             setImages(cachedQuestion.images);
             setMounted(true);
@@ -58,20 +60,23 @@ export default function ActiveQuestion(props: QuestionProps) {
                         question: QuestionType;
                         images: ImageType[];
                     };
-                    if (answers.find((ans) => ans.question === row)) {
-                        setAnswer(
-                            answers.find((ans) => ans.question === row)!.index
-                        );
+                    let userAnswer = answers.find(
+                        (ans) => ans.question === row
+                    );
+
+                    if (userAnswer) {
+                        setAnswer(userAnswer.index);
                     } else {
                         setAnswer(-1);
                     }
+
                     setExamQuestion(question);
                     setImages(images);
-                    setMounted(true);
                     setCachedQuestions([
                         ...cachedQuestions,
                         { question, images },
                     ]);
+                    setMounted(true);
                 })
                 .catch(() => {
                     setMounted(true);
@@ -131,6 +136,13 @@ export default function ActiveQuestion(props: QuestionProps) {
                                                     : "wrong"
                                                 : ""
                                         }
+                                        onClick={() =>
+                                            setAnswer(
+                                                examQuestion.options.indexOf(
+                                                    option
+                                                )
+                                            )
+                                        }
                                     >
                                         <input
                                             type="radio"
@@ -153,6 +165,9 @@ export default function ActiveQuestion(props: QuestionProps) {
                                         <label htmlFor={option._id}>
                                             {option.isImage ? (
                                                 <img
+                                                    style={{
+                                                        cursor: "pointer",
+                                                    }}
                                                     className="option-image"
                                                     src={convertBufferToBase64Image(
                                                         images.find(

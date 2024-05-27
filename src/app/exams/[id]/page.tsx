@@ -8,6 +8,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import Loading from "@/app/loading";
 import Navbar from "@/components/navbar/Navbar";
 import "./styles.css";
+import { error } from "console";
 
 interface ExamParms {
     id: string;
@@ -130,10 +131,10 @@ export default function Exam({ params }: { params: ExamParms }) {
                 })
                 .catch(({ response }: AxiosError) => {
                     let errorList = getErrors(response!);
-                    setErrorList(errorList);
-                    setIsLoading(false);
                     btn.disabled = false;
                     btn.classList.remove("disabled");
+                    setIsLoading(false);
+                    alert(errorList.map((e) => e.message).join("\n"));
                 });
         }
     };
