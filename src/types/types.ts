@@ -81,6 +81,8 @@ export interface QuestionType {
     row: number;
     question: {
         isImage: boolean;
+        isBoth: boolean;
+        imgValue?: number;
         value: string | number;
     };
     answers: OptionType;
@@ -96,7 +98,8 @@ export interface OptionType {
 
 export interface ImageType {
     _id: string;
-    id: string;
+    id: number;
+    bothId: number;
     data: {
         type: "Buffer";
         data: number[];

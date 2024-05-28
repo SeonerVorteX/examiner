@@ -104,7 +104,26 @@ export default function ActiveQuestion(props: QuestionProps) {
                 {examQuestion ? (
                     <div className="content">
                         <div className="question-content">
-                            {examQuestion.question.isImage ? (
+                            {examQuestion.question.isBoth ? (
+                                <div className="both">
+                                    <p className="both-question-text">
+                                        {index}. {examQuestion.question.value}
+                                    </p>
+                                    <div className="question-image">
+                                        <img
+                                            src={convertBufferToBase64Image(
+                                                images.find(
+                                                    (img) =>
+                                                        img.bothId ===
+                                                        examQuestion.question
+                                                            .imgValue
+                                                )!.data.data
+                                            )}
+                                            alt="Question"
+                                        />
+                                    </div>
+                                </div>
+                            ) : examQuestion.question.isImage ? (
                                 <div className="question-image">
                                     <h3>{index}.</h3>
                                     <img
