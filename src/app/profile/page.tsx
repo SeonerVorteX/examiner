@@ -1,13 +1,11 @@
 "use client";
 
 import "./styles.css";
-import Main from "@/components/main/Main";
-import Navbar from "@/components/navbar/Navbar";
 import { useEffect, useState } from "react";
-import Loader from "./loading";
 import axios from "@/utils/axios";
+import Loading from "../loading";
 
-export default function HomePage() {
+export default () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [mounted, setMounted] = useState(false);
 
@@ -27,21 +25,32 @@ export default function HomePage() {
                     setIsAuthenticated(false);
                     localStorage.removeItem("token");
                     localStorage.removeItem("user");
-                    setMounted(true);
+                    window.location.href = "/login";
                 });
         } else {
-            setMounted(true);
+            window.location.href = "/login";
         }
     }, []);
 
-    if (!mounted) {
-        return <Loader />;
-    }
+    const goBack = () => {
+        window.history.back();
+    };
 
-    return (
-        <>
-            <Navbar props={{ isAuthenticated, setIsAuthenticated }} />
-            <Main props={{ isAuthenticated, setIsAuthenticated }} />
-        </>
-    );
-}
+    if (!mounted) {
+        return <Loading />;
+    } else {
+        return (
+            <div className="notready container">
+                <div className="heading">
+                    <h1>Səhifə Hələ Hazır Deyil</h1>
+                    <p>
+                        Daxil olmağa çalıştığınız səhifə hələ hazır deyil. Hal
+                        hazırda üzərində çalışırıq. Yaxın zamanda istifadə üçün
+                        hazır olacaq. Müvəqqəti narahatlığa görə üzr istəyirik.
+                    </p>
+                    <a onClick={goBack}>Geri qayıt</a>
+                </div>
+            </div>
+        );
+    }
+};

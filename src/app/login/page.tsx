@@ -6,6 +6,7 @@ import { UserPayload } from "@/types/types";
 import Loader from "../loading";
 import axios from "@/utils/axios";
 import { getErrors } from "@/utils";
+import Link from "next/link";
 
 export default () => {
     const [usernameValid, setUsernameValid] = useState(true);
@@ -132,6 +133,17 @@ export default () => {
                             className={`${passwordValid ? "" : "invalid"}`}
                             required
                         />
+                        <p className="confirmation">
+                            Giriş edərək{" "}
+                            <Link href="/privacy-policy" target="_blank">
+                                Məxfilik Siyasətimizi
+                            </Link>{" "}
+                            və{" "}
+                            <Link href="/terms-of-service" target="_blank">
+                                İstifadə Şərtlərimizi
+                            </Link>{" "}
+                            qəbul etmiş olursunuz.
+                        </p>
                         <button
                             className={`submit ${
                                 usernameValid && passwordValid

@@ -1,24 +1,24 @@
-.notfound {
+.notready {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.notfound .heading {
+.notready .heading {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-bottom: 2rem;
 }
 
-.notfound h1 {
+.notready h1 {
     text-align: center;
     font-size: 1.5rem;
     color: var(--primary);
 }
 
-.notfound p {
+.notready p {
     text-align: center;
     color: var(--white);
     padding-top: 1rem;
@@ -27,7 +27,7 @@
     opacity: 0.7;
 }
 
-.notfound a {
+.notready a {
     color: var(--primary);
     text-align: center;
     font-size: 1.2rem;
@@ -36,7 +36,7 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .notfound a:hover {
+    .notready a:hover {
         text-decoration: underline;
     }
 }

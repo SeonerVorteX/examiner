@@ -1,9 +1,10 @@
-main .container.app {
+main#home .container.app {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding-top: 2rem;
+    min-height: 85vh;
     width: 100%;
 }
 

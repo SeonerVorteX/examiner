@@ -20,15 +20,32 @@ export default function Navbar({ props }: NavbarProps) {
     const { isAuthenticated, setIsAuthenticated, finishDate, timeOver } = props;
     const [fullName, setFullName] = useState<string>("Profil");
 
+    useEffect(() => {
+        document.addEventListener("scroll", () => {
+            const check = document.getElementById("check") as HTMLInputElement;
+            if (check && check.checked) {
+                check.checked = false;
+            }
+        });
+    }, []);
+
     const logout = () => {
-        axios.get("/auth/logout").then((res) => {
-            if (res.status === 200) {
+        axios
+            .get("/auth/logout")
+            .then((res) => {
+                if (res.status === 200) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+                    setIsAuthenticated(false);
+                    window.location.href = "/login";
+                }
+            })
+            .catch(() => {
                 localStorage.removeItem("token");
                 localStorage.removeItem("user");
                 setIsAuthenticated(false);
                 window.location.href = "/login";
-            }
-        });
+            });
     };
 
     useEffect(() => {
@@ -39,54 +56,56 @@ export default function Navbar({ props }: NavbarProps) {
     }, []);
 
     return (
-        <nav className="container">
-            <div className="nav-heading">
-                <h3>
-                    <Link href="/#">Examination</Link>
-                </h3>
-            </div>
+        <nav>
+            <div className="container">
+                <div className="nav-heading">
+                    <h3>
+                        <Link href="/#">Examination</Link>
+                    </h3>
+                </div>
 
-            <div className="nav-end">
-                {isAuthenticated ? (
-                    <>
-                        {finishDate ? (
-                            <Timer
-                                finishDate={finishDate}
-                                timeOver={timeOver!}
-                            />
-                        ) : (
-                            <>
-                                <input type="checkbox" id="check" />
-                                <label htmlFor="check" className="checkbtn">
-                                    <i className="fas fa-bars"></i>
-                                </label>
-                                <div className="buttons menu">
-                                    <a
-                                        className="btn tertiary-btn"
-                                        onClick={logout}
-                                    >
-                                        <i className="fa-solid fa-right-from-bracket"></i>{" "}
-                                        Logout
-                                    </a>
-                                    <Link
-                                        className="btn primary-btn profile-btn"
-                                        href="/profile"
-                                    >
-                                        <i className="fa-solid fa-user"></i>{" "}
-                                        {fullName}
-                                    </Link>
-                                </div>
-                            </>
-                        )}
-                    </>
-                ) : (
-                    <div className="buttons">
-                        <Link className="btn primary-btn" href="/login">
-                            <i className="fa-solid fa-right-from-bracket"></i>{" "}
-                            Giriş
-                        </Link>
-                    </div>
-                )}
+                <div className="nav-end">
+                    {isAuthenticated ? (
+                        <>
+                            {finishDate ? (
+                                <Timer
+                                    finishDate={finishDate}
+                                    timeOver={timeOver!}
+                                />
+                            ) : (
+                                <>
+                                    <input type="checkbox" id="check" />
+                                    <label htmlFor="check" className="checkbtn">
+                                        <i className="fas fa-bars"></i>
+                                    </label>
+                                    <div className="buttons menu">
+                                        <a
+                                            className="btn tertiary-btn"
+                                            onClick={logout}
+                                        >
+                                            <i className="fa-solid fa-right-from-bracket"></i>{" "}
+                                            Logout
+                                        </a>
+                                        <Link
+                                            className="btn primary-btn profile-btn"
+                                            href="/profile"
+                                        >
+                                            <i className="fa-solid fa-user"></i>{" "}
+                                            {fullName}
+                                        </Link>
+                                    </div>
+                                </>
+                            )}
+                        </>
+                    ) : (
+                        <div className="buttons">
+                            <Link className="btn primary-btn" href="/login">
+                                <i className="fa-solid fa-right-from-bracket"></i>{" "}
+                                Giriş
+                            </Link>
+                        </div>
+                    )}
+                </div>
             </div>
         </nav>
     );
