@@ -23,7 +23,6 @@ export interface APIError {
 export interface Exam {
     id: number;
     title: string;
-    shortName: string;
 }
 
 export interface ActiveExam {
