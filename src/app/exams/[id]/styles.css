@@ -1,6 +1,7 @@
 .container.exam {
     justify-content: center;
     max-width: 900px;
+    height: 85vh;
 }
 
 .errors {
@@ -38,13 +39,13 @@
     text-align: center;
 }
 
-table {
+.exam-container table {
     width: 80%;
     max-width: 80%;
     margin: 2rem 0 1rem 1rem;
 }
 
-table tr td:first-child {
+.exam-container table tr td:first-child {
     width: 30%;
     color: var(--white);
     font-weight: var(--w-b);
@@ -52,22 +53,22 @@ table tr td:first-child {
     letter-spacing: 1px;
 }
 
-table tr td {
+.exam-container table tr td {
     padding: 1rem 0;
 }
 
-table tr td:last-child {
+.exam-container table tr td:last-child {
     color: var(--white);
     font-weight: var(--w-sb);
 }
 
-.questionInterval {
+.exam-container .questionInterval {
     display: flex;
     align-items: center;
     gap: 1.5rem;
 }
 
-input[type="text"].qinput {
+.exam-container input[type="text"].qinput {
     color: var(--black);
     font-weight: var(--w-sb);
     height: 2rem;
@@ -76,12 +77,12 @@ input[type="text"].qinput {
     padding: 0.5rem;
 }
 
-.showAnswerBox {
+.exam-container .showAnswerBox {
     width: 1.2rem;
     height: 1.2rem;
 }
 
-.startExam {
+.exam-container .startExam {
     margin: 1rem auto;
     padding: 0.8rem 1.6rem;
     background-color: var(--primary);
@@ -94,7 +95,7 @@ input[type="text"].qinput {
     transition: all 0.3s ease;
 }
 
-.start-exam-btn-loader {
+.exam-container .start-exam-btn-loader {
     width: 1.2rem;
     height: 1.2rem;
     border-radius: 50%;
@@ -106,175 +107,192 @@ input[type="text"].qinput {
     z-index: 1000;
 }
 
-.startExam.disabled {
+.exam-container .startExam.disabled {
     cursor: not-allowed;
     background-color: var(--disabled-primary);
     color: var(--disabled-white);
 }
 
-.invalid {
+.exam-container .invalid {
     border: 1px solid red;
 }
 
-.exam-buttons {
+.exam-container .note p {
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: var(--w-m);
+    margin: 1rem;
+}
+
+.exam-container .exam-buttons {
     display: flex;
     justify-content: center;
 }
 
-.btn-invalid {
+.exam-container .btn-invalid {
     cursor: not-allowed !important;
     color: var(--disabled-white) !important;
     background-color: var(--disabled-primary) !important;
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .showAnswerBox:hover {
+    .exam-container .showAnswerBox:hover {
         cursor: pointer;
         box-shadow: 0 0 5px 0 var(--primary);
     }
 
-    .startExam.disabled:hover {
+    .exam-container .startExam.disabled:hover {
         background-color: var(--disabled-primary);
         box-shadow: none;
     }
 
-    .btn-invalid:hover {
+    .exam-container .btn-invalid:hover {
         box-shadow: none !important;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .exam-container {
+    .exam-container .exam-container {
         width: 90%;
     }
 
-    .exam-container .heading h2 {
+    .exam-container .exam-container .heading h2 {
         font-size: 1.2rem;
     }
 
-    .exam-table table {
+    .exam-container .exam-table table {
         width: 90%;
         max-width: 90%;
     }
 
-    .exam-table table tr td:first-child {
+    .exam-container .exam-table table tr td:first-child {
         width: 40%;
         font-size: 1rem;
     }
 
-    .exam-table table tr td {
+    .exam-container .exam-table table tr td {
         padding: 0.8rem 0;
     }
 
-    .exam-table table tr td:last-child {
+    .exam-container .exam-table table tr td:last-child {
         padding-left: 1.5rem;
         font-size: 1rem;
     }
 
-    .questionInterval {
+    .exam-container .questionInterval {
         gap: 1rem;
     }
 
-    .questionInterval .interval-msg {
+    .exam-container .questionInterval .interval-msg {
         font-size: 0.9rem;
     }
 
-    .questionInterval input[type="text"].qinput {
+    .exam-container .questionInterval input[type="text"].qinput {
         width: 2.5rem;
     }
 
-    .showAnswerBox {
+    .exam-container .showAnswerBox {
         width: 1rem;
         height: 1rem;
+    }
+
+    .exam-container .note p {
+        font-size: 0.9rem;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .exam-container {
+    .exam-container .exam-container {
         width: 95%;
         min-height: auto;
     }
 
-    .exam-container .heading h2 {
+    .exam-container .exam-container .heading h2 {
         font-size: 1rem;
     }
 
-    .exam-table table {
+    .exam-container .exam-table table {
         width: 95%;
         max-width: 95%;
     }
 
-    .exam-table table tr td:first-child {
+    .exam-container .exam-table table tr td:first-child {
         width: 50%;
         font-size: 0.8rem;
     }
 
-    .exam-table table tr td {
+    .exam-container .exam-table table tr td {
         padding: 0.6rem 0;
     }
 
-    .exam-table table tr td:last-child {
+    .exam-container .exam-table table tr td:last-child {
         padding-left: 1.5rem;
         font-size: 0.8rem;
     }
 
-    .questionInterval {
+    .exam-container .questionInterval {
         gap: 0.8rem;
     }
 
-    .questionInterval .interval-msg {
+    .exam-container .questionInterval .interval-msg {
         font-size: 0.6rem;
         margin-right: 0.5rem;
     }
 
-    .showAnswerBox {
+    .exam-container .showAnswerBox {
         width: 0.8rem;
         height: 0.8rem;
     }
 
-    .startExam {
+    .exam-container .startExam {
         padding: 0.8rem 1.5rem;
         font-size: 0.8rem;
-        margin-bottom: 0.5rem;
+    }
+
+    .exam-container .note p {
+        font-size: 0.8rem;
     }
 }
 
 @media screen and (max-width: 340px) {
-    .exam-container .heading h2 {
+    .exam-container .exam-container .heading h2 {
         font-size: 0.8rem;
     }
 
-    .exam-table table tr td:first-child {
+    .exam-container .exam-table table tr td:first-child {
         width: 60%;
         font-size: 0.7rem;
     }
 
-    .exam-table table tr td {
+    .exam-container .exam-table table tr td {
         padding: 0.5rem 0;
     }
 
-    .exam-table table tr td:last-child {
+    .exam-container .exam-table table tr td:last-child {
         padding-left: 1.5rem;
         font-size: 0.7rem;
     }
 
-    .questionInterval .interval-msg {
+    .exam-container .questionInterval .interval-msg {
         font-size: 0.5rem;
         margin-right: 0.3rem;
     }
 
-    .questionInterval input[type="text"].qinput {
+    .exam-container .questionInterval input[type="text"].qinput {
         width: 2rem;
     }
 
-    .showAnswerBox {
+    .exam-container .showAnswerBox {
         width: 0.6rem;
         height: 0.6rem;
     }
 
-    .startExam {
+    .exam-container .startExam {
         padding: 0.6rem 1.2rem;
         font-size: 0.6rem;
-        margin-bottom: 0rem;
+    }
+
+    .exam-container .note p {
+        font-size: 0.6rem;
     }
 }

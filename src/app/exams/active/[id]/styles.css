@@ -138,16 +138,24 @@
 }
 
 @media screen and (max-width: 480px) {
+    .active-exam-container .buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
     .active-exam-container .buttons .arrows {
-        font-size: 0.8rem;
+        margin: auto;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .active-exam-container .buttons .secondary-buttons {
+        justify-content: center;
+        gap: 1rem;
     }
 
     .active-exam-container .buttons .arrows button {
         padding: 0.5rem 1rem;
-    }
-
-    .active-exam-container .buttons .secondary-buttons {
-        gap: 0.2rem;
     }
 
     .active-exam-container .buttons .secondary-buttons .submit,

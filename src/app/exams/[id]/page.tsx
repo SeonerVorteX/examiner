@@ -226,6 +226,17 @@ export default function Exam({ params }: { params: ExamParms }) {
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div className="note">
+                                    <p>
+                                        <strong>Diqqət:</strong> Əgər sualın
+                                        şərti ilə variantlar arasında
+                                        əlaqəsizlik görürsünüzsə və sizə verilən
+                                        suallar içində belə bir sual olmadığına
+                                        əminsinizsə, zəhmət olmasa sualı bizə
+                                        bildirin ki, tez bir zamanda düzəliş
+                                        edək.
+                                    </p>
+                                </div>
                                 <div className="exam-buttons">
                                     <button
                                         className={`startExam btn primary-btn ${
