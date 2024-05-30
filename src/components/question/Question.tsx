@@ -70,11 +70,11 @@ export default function Question(props: QuestionProps) {
                                 {content.options.map((option, _index) => (
                                     <li
                                         key={_index}
-                                        className={
+                                        className={`disableCursor ${
                                             option.isCorrect
                                                 ? "correct"
                                                 : "wrong"
-                                        }
+                                        }`}
                                     >
                                         <input
                                             type="checkbox"
@@ -88,9 +88,13 @@ export default function Question(props: QuestionProps) {
                                                     : false
                                             }
                                         />
-                                        <label htmlFor={option._id}>
+                                        <label
+                                            htmlFor={option._id}
+                                            className="disableCursor"
+                                        >
                                             {option.isImage ? (
                                                 <img
+                                                    className="disableCursor option-image"
                                                     src={convertBufferToBase64Image(
                                                         images.find(
                                                             (img) =>

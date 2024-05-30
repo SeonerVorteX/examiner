@@ -49,7 +49,6 @@ export default function ({ params }: { params: ActiveExamParms }) {
                                         res.data.details.settings.showAnswer
                                     );
                                     setAnswers(res.data.userAnswers);
-                                    // setMounted(true);
 
                                     axios
                                         .get(
@@ -110,8 +109,9 @@ export default function ({ params }: { params: ActiveExamParms }) {
     }, [currentQuestion]);
 
     useEffect(() => {
-        window.addEventListener("keydown", (e) => {
-            console.log(e.key);
+        let executed = false;
+
+        document.addEventListener("keydown", (e) => {
             let leftBtn = document.querySelector(
                 ".left-arrow"
             ) as HTMLButtonElement;
@@ -120,14 +120,20 @@ export default function ({ params }: { params: ActiveExamParms }) {
             ) as HTMLButtonElement;
 
             if (e.key === "ArrowLeft") {
-                if (!leftBtn.disabled) {
+                if (!leftBtn.disabled && !executed) {
                     leftBtn.click();
+                    executed = true;
                 }
             } else if (e.key === "ArrowRight") {
-                if (!rightBtn.disabled) {
+                if (!rightBtn.disabled && !executed) {
                     rightBtn.click();
+                    executed = true;
                 }
             }
+        });
+
+        document.addEventListener("keyup", () => {
+            executed = false;
         });
     }, []);
 

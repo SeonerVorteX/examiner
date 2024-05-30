@@ -50,6 +50,11 @@
     flex-wrap: wrap;
 }
 
+.question .content .question-content .question-image img {
+    max-width: 50%;
+    border-radius: 0.5rem;
+}
+
 .question .content .question-content .question-image h3 {
     font-size: 1.5rem;
     font-weight: var(--w-b);
@@ -79,8 +84,24 @@
     align-items: center;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.question .content .options ul li.enableCursor,
+.question .content .options ul li.enableCursor label,
+.question .content .options ul li.enableCursor label img {
+    cursor: pointer;
+}
+
+.question .content .options ul li.disableCursor,
+.question .content .options ul li.disableCursor label,
+.question .content .options ul li.disableCursor label img {
+    cursor: default;
+}
+
+.question .content .options ul li label img {
+    max-width: 80%;
+    border-radius: 0.2rem;
 }
 
 .question .content .options ul .correct::before {
@@ -105,7 +126,7 @@
     }
 
     .question .content .question-content .question-image img {
-        max-width: 100%;
+        max-width: 75%;
     }
 
     .question .content .question-content .question-text {
@@ -125,7 +146,7 @@
     }
 
     .question .content .options ul li label img {
-        max-width: 100%;
+        max-width: 75%;
     }
 
     .question .content .options ul .correct::before,
@@ -137,6 +158,10 @@
 @media screen and (max-width: 480px) {
     .question .content .question-content .question-image h3 {
         font-size: 1rem;
+    }
+
+    .question .content .question-content .question-image img {
+        max-width: 100%;
     }
 
     .question .content .question-content .question-text {
@@ -153,6 +178,10 @@
 
     .question .content .options ul li label {
         font-size: 0.9rem;
+    }
+
+    .question .content .options ul li label img {
+        max-width: 100%;
     }
 
     .question .content .options ul .correct::before,

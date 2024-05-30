@@ -24,11 +24,6 @@ export default function ActiveQuestion(props: QuestionProps) {
             : -1
     );
 
-    const convertBufferToBase64Image = (buffer: number[]) => {
-        const base64 = Buffer.from(buffer).toString("base64");
-        return `data:image/png;base64,${base64}`;
-    };
-
     useEffect(() => {
         if (answer !== -1) {
             let answerList = answers.filter(
@@ -36,16 +31,25 @@ export default function ActiveQuestion(props: QuestionProps) {
             );
             answerList.push({ question: content.row, index: answer });
             setAnswers(answerList);
+            console.log(answerList);
         }
     }, [answer]);
 
     useEffect(() => {
-        setAnswer(
-            answers.find((ans) => ans.question === content.row) !== undefined
-                ? answers.find((ans) => ans.question === content.row)!.index
-                : -1
-        );
+        let userAnswer = answers.find((ans) => ans.question === content.row);
+
+        if (userAnswer) {
+            console.log(userAnswer.index);
+            setAnswer(userAnswer.index);
+        } else {
+            setAnswer(-1);
+        }
     }, [index]);
+
+    const convertBufferToBase64Image = (buffer: number[]) => {
+        const base64 = Buffer.from(buffer).toString("base64");
+        return `data:image/png;base64,${base64}`;
+    };
 
     return (
         <article className="question">
@@ -95,13 +99,13 @@ export default function ActiveQuestion(props: QuestionProps) {
                             {content.options.map((option, _index) => (
                                 <li
                                     key={_index}
-                                    className={
+                                    className={`enableCursor ${
                                         showAnswers
                                             ? option.isCorrect
                                                 ? "correct"
                                                 : "wrong"
                                             : ""
-                                    }
+                                    }`}
                                     onClick={() =>
                                         setAnswer(
                                             content.options.indexOf(option)
@@ -112,6 +116,9 @@ export default function ActiveQuestion(props: QuestionProps) {
                                         type="radio"
                                         name="option"
                                         key={_index}
+                                        onKeyDown={(e) => {
+                                            e.preventDefault();
+                                        }}
                                         checked={
                                             answer ===
                                             content.options.indexOf(option)
@@ -122,13 +129,16 @@ export default function ActiveQuestion(props: QuestionProps) {
                                             )
                                         }
                                     />
-                                    <label htmlFor={option._id}>
+                                    <label
+                                        htmlFor={option._id}
+                                        className="enableCursor"
+                                    >
                                         {option.isImage ? (
                                             <img
                                                 style={{
                                                     cursor: "pointer",
                                                 }}
-                                                className="option-image"
+                                                className="enableCursor option-image"
                                                 src={convertBufferToBase64Image(
                                                     images.find(
                                                         (img) =>
