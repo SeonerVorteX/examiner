@@ -98,6 +98,7 @@ export interface OptionType {
 export interface ImageType {
     _id: string;
     id: number;
+    type: number;
     bothId: number;
     data: {
         type: "Buffer";

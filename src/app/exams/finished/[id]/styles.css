@@ -85,6 +85,14 @@
     margin-bottom: 1rem;
 }
 
+.exam-container .questions .loader-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
 @media screen and (max-width: 768px) {
     .exam-container .exam-heading h2 {
         font-size: 1.2rem;

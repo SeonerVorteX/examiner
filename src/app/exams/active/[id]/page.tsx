@@ -1,6 +1,6 @@
 "use client";
 
-import { APIError, ActiveExam } from "@/types/types";
+import { APIError, ActiveExam, ImageType, QuestionType } from "@/types/types";
 import { useEffect, useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
 import { getErrors } from "@/utils";
@@ -18,6 +18,8 @@ export default function ({ params }: { params: ActiveExamParms }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [errorList, setErrorList] = useState<APIError[]>([]);
     const [activeExam, setActiveExam] = useState<ActiveExam>();
+    const [questions, setQuestions] = useState<QuestionType[]>([]);
+    const [images, setImages] = useState<ImageType[]>([]);
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [showAnswers, setShowAnswers] = useState(false);
     const [showCurrentAnswer, setShowCurrentAnswer] = useState(false);
@@ -42,12 +44,33 @@ export default function ({ params }: { params: ActiveExamParms }) {
                             .then((res: AxiosResponse) => {
                                 if (res.status === 200) {
                                     setActiveExam(res.data);
+                                    document.title = `${res.data.details.title} | Examination`;
                                     setShowAnswers(
                                         res.data.details.settings.showAnswer
                                     );
                                     setAnswers(res.data.userAnswers);
-                                    document.title = `${res.data.details.title} | Examination`;
-                                    setMounted(true);
+                                    // setMounted(true);
+
+                                    axios
+                                        .get(
+                                            `/exams/active/${examId}/questions`
+                                        )
+                                        .then((res: AxiosResponse) => {
+                                            if (res.status === 200) {
+                                                setQuestions(
+                                                    res.data.questions
+                                                );
+                                                setImages(res.data.images);
+                                                setMounted(true);
+                                            }
+                                        })
+                                        .catch(({ response }: AxiosError) => {
+                                            let errorList = getErrors(
+                                                response!
+                                            );
+                                            setErrorList(errorList);
+                                            setMounted(true);
+                                        });
                                 }
                             })
                             .catch(({ response }: AxiosError) => {
@@ -85,6 +108,28 @@ export default function ({ params }: { params: ActiveExamParms }) {
             btn.classList.remove("disabled");
         }
     }, [currentQuestion]);
+
+    useEffect(() => {
+        window.addEventListener("keydown", (e) => {
+            console.log(e.key);
+            let leftBtn = document.querySelector(
+                ".left-arrow"
+            ) as HTMLButtonElement;
+            let rightBtn = document.querySelector(
+                ".right-arrow"
+            ) as HTMLButtonElement;
+
+            if (e.key === "ArrowLeft") {
+                if (!leftBtn.disabled) {
+                    leftBtn.click();
+                }
+            } else if (e.key === "ArrowRight") {
+                if (!rightBtn.disabled) {
+                    rightBtn.click();
+                }
+            }
+        });
+    }, []);
 
     const submit = (force?: boolean) => {
         if (force) {
@@ -160,23 +205,42 @@ export default function ({ params }: { params: ActiveExamParms }) {
                             <Question
                                 examId={examId}
                                 showAnswers={showCurrentAnswer}
-                                details={{
-                                    _id: activeExam.details.questions[
-                                        currentQuestion - 1
-                                    ]._id,
-                                    row: activeExam.details.questions[
-                                        currentQuestion - 1
-                                    ].row,
-                                    index: currentQuestion,
-                                    answers,
-                                    setAnswers,
-                                }}
+                                index={currentQuestion}
+                                content={questions[currentQuestion - 1]}
+                                images={images.filter((img) => {
+                                    let q = questions.find(
+                                        (q) =>
+                                            q.row ===
+                                            questions[currentQuestion - 1].row
+                                    )!;
+                                    let imgValues: number[] = [];
+                                    if (q.question.isBoth) {
+                                        imgValues.push(q.question.imgValue!);
+                                    } else if (q.question.isImage) {
+                                        imgValues.push(
+                                            q.question.value as number
+                                        );
+                                    }
+
+                                    q.options
+                                        .filter((opt) => opt.isImage)
+                                        .forEach((opt) => {
+                                            imgValues.push(opt.value as number);
+                                        });
+
+                                    return (
+                                        imgValues.includes(img.id) ||
+                                        imgValues.includes(img.bothId)
+                                    );
+                                })}
+                                answers={answers}
+                                setAnswers={setAnswers}
                             />
 
                             <div className="buttons">
                                 <div className="arrows">
                                     <button
-                                        className={`btn primary-btn ${
+                                        className={`left-arrow btn primary-btn ${
                                             currentQuestion == 1
                                                 ? "disabled"
                                                 : ""
@@ -192,7 +256,7 @@ export default function ({ params }: { params: ActiveExamParms }) {
                                         <i className="fa-solid fa-arrow-left"></i>
                                     </button>
                                     <button
-                                        className={`btn primary-btn ${
+                                        className={`right-arrow btn primary-btn ${
                                             currentQuestion ==
                                             activeExam.details.settings
                                                 .questionCount
