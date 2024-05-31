@@ -34,7 +34,7 @@ export default ({ id, title, url }: ExamCardProps) => {
                 </h3>
             </Link>
             <Link className="btn primary-btn get-exam" href={url}>
-                <i className="fa-solid fa-pen"></i> İmtahana Ver
+                <i className="fa-solid fa-pen"></i> İmtahan Ver
             </Link>
         </article>
     );

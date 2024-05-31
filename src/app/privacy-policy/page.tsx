@@ -86,7 +86,7 @@ export default function PrivacyPolicy() {
                         <li>
                             <p>
                                 <strong>İmtahan</strong> Aid olduğunuz Qrupdakı
-                                aktif İmtahanları nəzərdə tutur.
+                                aktiv İmtahanları nəzərdə tutur.
                             </p>
                         </li>
                         <li>

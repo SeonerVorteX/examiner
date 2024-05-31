@@ -36,7 +36,7 @@ export default () => {
         <>
             <div className="container app">
                 <div className="header">
-                    <h2>{group} qrupu üçün aktif imtahanlar:</h2>
+                    <h2>{group} qrupu üçün aktiv imtahanlar:</h2>
                 </div>
 
                 {exams.length > 0 ? (
