@@ -99,7 +99,7 @@ export default function ({ params }: { params: FinishedExamParms }) {
         return (
             <>
                 <Navbar props={{ isAuthenticated, setIsAuthenticated }} />
-                <div className="container exam">
+                <div className="container exam finished">
                     {!finishedExam ? (
                         <div className="errors">
                             {errorList.map((error, index) => (

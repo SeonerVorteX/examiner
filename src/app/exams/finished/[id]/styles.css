@@ -1,5 +1,6 @@
-.container.exam {
+.container.exam.finished {
     justify-content: center;
+    max-width: 900px;
 }
 
 .errors {

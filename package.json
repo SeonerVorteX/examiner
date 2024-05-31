@@ -8,6 +8,16 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeonerVorteX/examiner.git"
+  },
+  "author": "Mehdi Safarzade <contact@mehdisafarzade.dev>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/SeonerVorteX/examiner/issues"
+  },
+  "homepage": "https://github.com/SeonerVorteX/examiner#readme",
   "dependencies": {
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
