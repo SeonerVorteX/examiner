@@ -19,10 +19,12 @@
   },
   "homepage": "https://github.com/SeonerVorteX/examiner#readme",
   "dependencies": {
+    "@next/third-parties": "^14.2.3",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "next": "14.2.3",
     "react": "^18",
+    "react-cookie-consent": "^9.0.0",
     "react-dom": "^18"
   },
   "devDependencies": {

@@ -1,0 +1,108 @@
+.cookie-banner {
+    position: relative;
+    max-width: 450px;
+    height: auto;
+    background-color: var(--tertiary);
+    color: var(--white);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cookie-banner .reject {
+    font-size: 1.3rem;
+    cursor: pointer;
+    position: absolute;
+    right: 0.7rem;
+    top: 0.7rem;
+    transition: 0.3s all ease;
+}
+
+.cookie-banner p {
+    font-size: 1.2rem;
+    font-weight: var(--w-m);
+}
+
+.cookie-banner .cookie-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.cookie-banner .cookie-buttons button,
+.cookie-banner .cookie-buttons a {
+    padding: 0.7rem 1.4rem;
+    text-align: center;
+    place-content: center;
+    font-size: 1.1rem;
+    font-weight: var(--w-m);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .cookie-banner .reject:hover {
+        transform: scale(1.1);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cookie-banner .reject {
+        font-size: 1.1rem;
+    }
+
+    .cookie-banner p {
+        font-size: 1rem;
+    }
+    .cookie-banner .cookie-buttons button,
+    .cookie-banner .cookie-buttons a {
+        padding: 0.6rem 1.2rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .cookie-banner {
+        padding: 1.5rem;
+    }
+
+    .cookie-banner .reject {
+        font-size: 1rem;
+    }
+
+    .cookie-banner .cookie-buttons {
+        gap: 1rem;
+    }
+
+    .cookie-banner p {
+        font-size: 0.9rem;
+    }
+
+    .cookie-banner .cookie-buttons button,
+    .cookie-banner .cookie-buttons a {
+        padding: 0.6rem 0.7rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .cookie-banner {
+        padding: 1.25rem;
+    }
+
+    .cookie-banner .reject {
+        font-size: 0.9rem;
+    }
+
+    .cookie-banner p {
+        font-size: 0.8rem;
+    }
+
+    .cookie-banner .cookie-buttons {
+        gap: 0.8rem;
+    }
+
+    .cookie-banner .cookie-buttons button,
+    .cookie-banner .cookie-buttons a {
+        padding: 0.5rem 1rem;
+    }
+}

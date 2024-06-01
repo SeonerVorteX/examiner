@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Script from "next/script";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
     title: "UNEC | Examination",
@@ -9,9 +10,10 @@ export const metadata: Metadata = {
         "Examination",
         "UNEC",
         "ADIU",
-        "Semestr",
-        "Kollekvium",
-        "Midterm",
+        "Semestr İmtahanı",
+        "Final İmahanı",
+        "Kollekvium İmtahanı",
+        "Midterm İmtahanı",
     ],
     authors: [{ name: "Mehdi Safarzade", url: "https://mehdisafarzade.dev" }],
     metadataBase: new URL("https://unec-examination.vercel.app"),
@@ -61,18 +63,38 @@ export default function RootLayout({
                 ></script>
             </head>
             <body>{children}</body>
-            <Script
-                src={`https://www.googletagmanager.com/gtag/js?id=${process.env
-                    .NEXT_PUBLIC_GOOGLE_ANALYTICS!}`}
-            ></Script>
+            <GoogleTagManager
+                gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER!}
+            />
             <Script>
                 {`
+                let cookies = localStorage.getItem("cookies");
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS!}');
+
+                if(cookies === true || cookies === "true") {
+                    gtag('consent', 'update', {
+                        'ad_storage': 'granted',
+                        'ad_user_data': 'granted',
+                        'ad_personalization': 'granted',
+                        'analytics_storage': 'granted'
+                    });
+                } else {
+                    gtag('consent', 'default', {
+                        'ad_storage': 'denied',
+                        'ad_user_data': 'denied',
+                        'ad_personalization': 'denied',
+                        'analytics_storage': 'denied'
+                    });
+                }
             `}
             </Script>
+            <Script
+                src={`https://www.googletagmanager.com/gtag/js?id=${process.env
+                    .NEXT_PUBLIC_GOOGLE_ANALYTICS!}`}
+            ></Script>
         </html>
     );
 }

@@ -200,7 +200,7 @@ export default function PrivacyPolicy() {
                         mobil cihaz vasitəsilə Xidmətə daxil olduğunuz zaman
                         brauzerinizin göndərdiyi məlumatları toplaya bilərik.
                     </p>
-                    <h4>İzləmə Texnologiyaları və Cookies</h4>
+                    <h4 id="cookies">İzləmə Texnologiyaları və Cookies</h4>
                     <p>
                         Biz Xidmətimizdə fəaliyyətləri izləmək və müəyyən
                         məlumatları saxlamaq üçün Cookies və bənzər izləmə

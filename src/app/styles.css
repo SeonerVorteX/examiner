@@ -35,9 +35,32 @@
     margin: 1rem;
 }
 
+.banner {
+    position: fixed;
+    bottom: 2rem;
+    right: -30rem;
+    margin-left: 2rem;
+}
+
+.banner.visible {
+    animation: fadeInLeft 0.5s forwards;
+}
+
 @media (hover: hover) and (pointer: fine) {
     .notfound a:hover {
         text-decoration: underline;
         cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .banner {
+        bottom: -12rem;
+        right: 1rem;
+        margin-left: 1rem;
+    }
+
+    .banner.visible {
+        animation: fadeInUp 0.5s forwards;
     }
 }

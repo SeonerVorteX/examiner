@@ -39,3 +39,15 @@ export const getErrors = (res: AxiosResponse) => {
 
     return errorList;
 };
+
+export const handleAcceptCookie = () => {
+    localStorage.setItem("cookies", "true");
+    const element = document.querySelector(".cookie-banner")!;
+    if (element) element.remove();
+};
+
+export const handleRejectCookie = () => {
+    localStorage.setItem("cookies", "false");
+    const element = document.querySelector(".cookie-banner")!;
+    if (element) element.remove();
+};

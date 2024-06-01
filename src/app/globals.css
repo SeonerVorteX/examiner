@@ -136,6 +136,28 @@ a {
     }
 }
 
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        bottom: -12rem;
+    }
+    100% {
+        opacity: 1;
+        bottom: 2rem;
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        right: -30rem;
+    }
+    100% {
+        opacity: 1;
+        right: 2rem;
+    }
+}
+
 ::-webkit-scrollbar {
     width: 0.6rem;
 }
@@ -150,6 +172,10 @@ a {
 
 @media (hover: hover) and (pointer: fine) {
     .primary-btn:hover {
+        box-shadow: 0 0 5px 0 var(--primary);
+    }
+
+    .secondary-btn:hover {
         box-shadow: 0 0 5px 0 var(--primary);
     }
 

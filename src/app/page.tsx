@@ -6,13 +6,26 @@ import Navbar from "@/components/navbar/Navbar";
 import { useEffect, useState } from "react";
 import Loader from "./loading";
 import axios from "@/utils/axios";
+import CookieBanner from "@/components/cookie/CookieBanner";
 
 export default function HomePage() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [useCookies, setUseCookies] = useState<boolean | null>(false);
+    const [consentVisible, setConsentVisible] = useState<boolean>(false);
+    const [secondMount, setSecondMount] = useState<boolean>(false);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setTimeout(() => {
+            setConsentVisible(true);
+        }, 1500);
+        setSecondMount(true);
+    }, []);
+
+    useEffect(() => {
         const token = localStorage.getItem("token");
+        const cookies = localStorage.getItem("cookies") as boolean | null;
+        setUseCookies(cookies);
 
         if (token) {
             axios
@@ -34,7 +47,7 @@ export default function HomePage() {
         }
     }, []);
 
-    if (!mounted) {
+    if (!mounted || !secondMount) {
         return <Loader />;
     }
 
@@ -42,6 +55,11 @@ export default function HomePage() {
         <>
             <Navbar props={{ isAuthenticated, setIsAuthenticated }} />
             <Main props={{ isAuthenticated, setIsAuthenticated }} />
+            {useCookies === null ? (
+                <div className={`banner ${consentVisible ? "visible" : ""}`}>
+                    <CookieBanner />
+                </div>
+            ) : null}
         </>
     );
 }
