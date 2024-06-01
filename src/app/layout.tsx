@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
 
 export const metadata: Metadata = {
     title: "UNEC | Examination",
@@ -61,9 +61,18 @@ export default function RootLayout({
                 ></script>
             </head>
             <body>{children}</body>
-            <GoogleTagManager
-                gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER!}
-            />
+            <Script
+                src={`https://www.googletagmanager.com/gtag/js?id=${process.env
+                    .NEXT_PUBLIC_GOOGLE_ANALYTICS!}`}
+            ></Script>
+            <Script>
+                {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS!}');
+            `}
+            </Script>
         </html>
     );
 }
