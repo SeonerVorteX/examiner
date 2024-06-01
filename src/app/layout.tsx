@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
     title: "UNEC | Examination",
@@ -60,6 +61,9 @@ export default function RootLayout({
                 ></script>
             </head>
             <body>{children}</body>
+            <GoogleTagManager
+                gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER!}
+            />
         </html>
     );
 }
