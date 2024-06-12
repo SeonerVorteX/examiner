@@ -51,7 +51,13 @@ export default () => {
                         ))}
                     </div>
                 ) : (
-                    <h3 className="no-exam">Aktiv imtahan yoxdur</h3>
+                    <h3 className="no-exam">
+                        Təəssüf ki, sizin aid olduğunuz qrup sistemdə
+                        aktivləşdirilməyib. Zəhmət olmasa starostanız{" "}
+                        <a href="mailto:contact@mehdisafarzade.dev">
+                            bizimlə əlaqə saxlasın
+                        </a>
+                    </h3>
                 )}
             </div>
             <Footer />

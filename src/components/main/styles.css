@@ -30,6 +30,11 @@
     font-weight: var(--w-sb);
     color: var(--error);
     text-align: center;
+    width: 60%;
+}
+
+#home .no-exam a {
+    color: var(--primary);
 }
 
 #home p {
@@ -37,6 +42,12 @@
     font-weight: var(--w-m);
     color: var(--white);
     opacity: 0.7;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    #home .no-exam a:hover {
+        text-decoration: underline;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -50,6 +61,7 @@
 
     #home .no-exam {
         font-size: 1.3rem;
+        width: 80%;
     }
 }
 
@@ -60,6 +72,7 @@
 
     #home .no-exam {
         font-size: 1.1rem;
+        width: 100%;
     }
 
     #home p {
