@@ -3,7 +3,7 @@
 import { APIError, ActiveExam, ImageType, QuestionType } from "@/types/types";
 import { useEffect, useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
-import { getErrors } from "@/utils";
+import { getErrors, redirectToLogin } from "@/utils";
 import axios from "@/utils/axios";
 import Navbar from "@/components/navbar/Navbar";
 import Loading from "@/app/loading";
@@ -81,12 +81,10 @@ export default function ({ params }: { params: ActiveExamParms }) {
                 })
                 .catch(() => {
                     setIsAuthenticated(false);
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("user");
-                    window.location.href = "/login";
+                    redirectToLogin();
                 });
         } else {
-            window.location.href = "/login";
+            redirectToLogin();
         }
     }, []);
 
@@ -146,7 +144,6 @@ export default function ({ params }: { params: ActiveExamParms }) {
             axios
                 .get(`/exams/active/${examId}/finish`)
                 .then(() => {
-                    window.location.href = `/exams/finished/${examId}`;
                     setIsLoading(false);
                     btn.disabled = false;
                 })
@@ -174,8 +171,9 @@ export default function ({ params }: { params: ActiveExamParms }) {
     };
 
     const timeOver = () => {
-        alert("Vaxtınız bitdi!");
         submit(true);
+        alert("Vaxtınız bitdi!");
+        window.location.href = `/exams/finished/${examId}`;
     };
 
     const showAnswer = () => {

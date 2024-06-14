@@ -1,4 +1,4 @@
-import { APIError } from "@/types/types";
+import { APIError, RedirectOptions } from "@/types/types";
 import { AxiosResponse } from "axios";
 import { config } from "dotenv";
 import APIErrors from "@/errors/errors.json";
@@ -50,4 +50,17 @@ export const handleRejectCookie = () => {
     localStorage.setItem("cookies", "false");
     const element = document.querySelector(".cookie-banner")!;
     if (element) element.remove();
+};
+
+export const redirectToLogin = (options?: RedirectOptions) => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    if (options && options.redirect === false) {
+        window.location.href = "/login";
+    } else {
+        window.location.href = `/login?redirect=${
+            options && options.path ? options.path : window.location.pathname
+        }`;
+    }
 };

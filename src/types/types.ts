@@ -3,15 +3,8 @@ export interface UserPayload {
     email: string;
     fullname: string;
     group: string;
-    groupNames: string;
+    groupName: string;
     accessToken: string;
-}
-
-export interface UserInformation {
-    _id: string;
-    email: string;
-    createdDate: number;
-    updatedDate: number;
 }
 
 export interface APIError {
@@ -104,4 +97,9 @@ export interface ImageType {
         type: "Buffer";
         data: number[];
     };
+}
+
+export interface RedirectOptions {
+    redirect?: boolean;
+    path?: string;
 }

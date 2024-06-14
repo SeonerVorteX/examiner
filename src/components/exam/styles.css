@@ -1,0 +1,85 @@
+#exam-card .exam-item {
+    /* display: flex;
+    flex-direction: column; */
+    padding: 1rem;
+    border-radius: 0.3rem;
+    border: 2px solid var(--secondary);
+    background-color: var(--tertiary);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+#exam-card .exam-item.active {
+    border: 2px solid var(--disabled-warning);
+}
+
+#exam-card .exam-item table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#exam-card .exam-item table th {
+    padding: 0.2rem;
+    color: var(--white);
+    font-weight: var(--w-sb);
+}
+
+#exam-card .exam-item table td {
+    padding: 0.2rem;
+    color: var(--white);
+    font-size: 0.9rem;
+    font-weight: var(--w-m);
+    opacity: 0.8;
+    text-align: center;
+    max-width: 200px;
+}
+
+#exam-card .exam-item table button {
+    font-size: 1rem;
+    padding: 0.8rem 1.6rem;
+    white-space: nowrap;
+}
+@media (hover: hover) and (pointer: fine) {
+    #exam-card .exam-item:hover {
+        border-color: var(--primary);
+    }
+
+    #exam-card .exam-item.active:hover {
+        border-color: var(--warning);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #exam-card .exam-item {
+        padding: 0.5rem;
+    }
+
+    #exam-card .exam-item table th {
+        font-size: 0.9rem;
+    }
+
+    #exam-card .exam-item table td {
+        font-size: 0.75rem;
+    }
+
+    #exam-card .exam-item table button {
+        padding: 0.5rem 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #exam-card .exam-item table button {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    #exam-card .exam-item table th {
+        font-size: 0.8rem;
+    }
+
+    #exam-card .exam-item table td {
+        font-size: 0.65rem;
+    }
+}

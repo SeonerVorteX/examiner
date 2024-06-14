@@ -3,12 +3,11 @@
 import type { APIError, Exam } from "@/types/types";
 import { useEffect, useState } from "react";
 import axios from "@/utils/axios";
-import { getErrors } from "@/utils";
+import { getErrors, redirectToLogin } from "@/utils";
 import { AxiosError, AxiosResponse } from "axios";
 import Loading from "@/app/loading";
 import Navbar from "@/components/navbar/Navbar";
 import "./styles.css";
-import { error } from "console";
 
 interface ExamParms {
     id: string;
@@ -55,12 +54,10 @@ export default function Exam({ params }: { params: ExamParms }) {
                 })
                 .catch(() => {
                     setIsAuthenticated(false);
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("user");
-                    window.location.href = "/login";
+                    redirectToLogin();
                 });
         } else {
-            window.location.href = "/login";
+            redirectToLogin();
         }
     }, []);
 
@@ -69,13 +66,20 @@ export default function Exam({ params }: { params: ExamParms }) {
             if (e.target.value) {
                 if (
                     isNaN(parseInt(e.target.value)) ||
-                    parseInt(e.target.value) < 1
+                    parseInt(e.target.value) < 1 ||
+                    parseInt(e.target.value) > exam!.questionCount
                 ) {
                     setStartPointValid(false);
                     setStartPoint(e.target.value);
                 } else {
                     setStartPointValid(true);
                     setStartPoint(e.target.value);
+                    if (
+                        endPoint &&
+                        parseInt(e.target.value) > parseInt(endPoint)
+                    ) {
+                        setEndPointValid(false);
+                    }
                 }
             } else {
                 setStartPoint(e.target.value);

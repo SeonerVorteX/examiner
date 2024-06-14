@@ -6,6 +6,7 @@ import axios from "@/utils/axios";
 import { useEffect, useState } from "react";
 import { UserPayload } from "@/types/types";
 import Timer from "../timer/Timer";
+import { redirectToLogin } from "@/utils";
 
 interface NavbarProps {
     props: {
@@ -34,17 +35,13 @@ export default function Navbar({ props }: NavbarProps) {
             .get("/auth/logout")
             .then((res) => {
                 if (res.status === 200) {
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("user");
+                    redirectToLogin({ redirect: false });
                     setIsAuthenticated(false);
-                    window.location.href = "/login";
                 }
             })
             .catch(() => {
-                localStorage.removeItem("token");
-                localStorage.removeItem("user");
+                redirectToLogin({ redirect: false });
                 setIsAuthenticated(false);
-                window.location.href = "/login";
             });
     };
 

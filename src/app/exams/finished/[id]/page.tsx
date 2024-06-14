@@ -11,7 +11,7 @@ import {
 } from "@/types/types";
 import axios from "@/utils/axios";
 import { AxiosError, AxiosResponse } from "axios";
-import { getErrors } from "@/utils";
+import { getErrors, redirectToLogin } from "@/utils";
 import Loading from "@/app/loading";
 import Navbar from "@/components/navbar/Navbar";
 import Question from "@/components/question/Question";
@@ -84,12 +84,10 @@ export default function ({ params }: { params: FinishedExamParms }) {
                 })
                 .catch(() => {
                     setIsAuthenticated(false);
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("user");
-                    window.location.href = "/login";
+                    redirectToLogin();
                 });
         } else {
-            window.location.href = "/login";
+            redirectToLogin();
         }
     }, []);
 

@@ -74,6 +74,8 @@ export default () => {
         submitButton!.classList.add("loading");
         submitButton!.disabled = true;
         setIsLoading(true);
+        const redirectUrl =
+            new URLSearchParams(window.location.search).get("redirect") || "/";
 
         axios
             .post("/auth/login", {
@@ -87,7 +89,7 @@ export default () => {
                     const { user } = res.data as { user: UserPayload };
                     localStorage.setItem("user", JSON.stringify(user));
                     localStorage.setItem("token", user.accessToken);
-                    window.location.href = "/";
+                    window.location.href = redirectUrl;
                     submitButton!.innerHTML = "Giriş Edildi!";
                 }
             })
