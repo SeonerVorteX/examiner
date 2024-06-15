@@ -28,6 +28,43 @@
     justify-content: space-around;
 }
 
+.active-exam-container .settings {
+    padding: 2rem 2rem 1rem 2rem;
+}
+
+.active-exam-container .settings .question-row-search {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.active-exam-container .settings .question-row-search input {
+    color: var(--black);
+    font-size: 1.2rem;
+    font-weight: var(--w-sb);
+    height: 2.5rem;
+    width: 3rem;
+    border-radius: 4px;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.active-exam-container .settings .question-row-search input.invalid {
+    outline: 1px solid red;
+}
+
+.active-exam-container .settings .question-row-search p {
+    font-size: 1rem;
+    font-weight: var(--w-sb);
+    color: var(--white);
+}
+
+.active-exam-container .settings .question-row-search a {
+    color: hsla(180, 100%, 45%, 0.968);
+    cursor: pointer;
+}
+
 .active-exam-container .buttons {
     display: flex;
     flex-direction: row;
@@ -117,6 +154,16 @@
 }
 
 @media screen and (max-width: 768px) {
+    .active-exam-container .settings .question-row-search input {
+        width: 2.5rem;
+        height: 2rem;
+        font-size: 1.1rem;
+    }
+
+    .active-exam-container .settings .question-row-search p {
+        font-size: 0.9rem;
+    }
+
     .active-exam-container .buttons .arrows {
         gap: 1.5rem;
         font-size: 1rem;
@@ -138,6 +185,21 @@
 }
 
 @media screen and (max-width: 520px) {
+    .active-exam-container .settings .question-row-search {
+        padding-left: 0.5rem;
+        justify-content: flex-start;
+    }
+
+    .active-exam-container .settings .question-row-search input {
+        width: 2.2rem;
+        height: 1.8rem;
+        font-size: 0.9rem;
+    }
+
+    .active-exam-container .settings .question-row-search p {
+        font-size: 0.85rem;
+    }
+
     .active-exam-container .buttons {
         flex-direction: column;
         gap: 1rem;
@@ -166,6 +228,15 @@
 }
 
 @media screen and (max-width: 375px) {
+    .active-exam-container .settings .question-row-search input {
+        width: 2.2rem;
+        height: 1.8rem;
+    }
+
+    .active-exam-container .settings .question-row-search p {
+        font-size: 0.8rem;
+    }
+
     .active-exam-container .buttons {
         flex-direction: column;
         gap: 1rem;

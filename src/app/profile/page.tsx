@@ -19,6 +19,8 @@ export default () => {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        document.title = "Profile | Examination";
+
         const token = localStorage.getItem("token");
         if (token) {
             axios

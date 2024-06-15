@@ -11,7 +11,7 @@ import {
 } from "@/types/types";
 import axios from "@/utils/axios";
 import { AxiosError, AxiosResponse } from "axios";
-import { getErrors, redirectToLogin } from "@/utils";
+import { getErrors, redirectToLogin, seperateQuestions } from "@/utils";
 import Loading from "@/app/loading";
 import Navbar from "@/components/navbar/Navbar";
 import Question from "@/components/question/Question";
@@ -55,13 +55,25 @@ export default function ({ params }: { params: FinishedExamParms }) {
                                         )
                                         .then((res: AxiosResponse) => {
                                             if (res.status === 200) {
+                                                let questionsData = res.data
+                                                    .questions as QuestionType[];
+                                                let answersData = res.data
+                                                    .userAnswers as {
+                                                    question: ExamQuestion;
+                                                    index: number;
+                                                }[];
+                                                let imagesData = res.data
+                                                    .images as ImageType[];
+                                                let { correct, wrong, empty } =
+                                                    seperateQuestions(
+                                                        questionsData,
+                                                        answersData
+                                                    );
                                                 setQuestions(
-                                                    res.data.questions
+                                                    wrong.concat(empty, correct)
                                                 );
-                                                setImages(res.data.images);
-                                                setUserAnswers(
-                                                    res.data.userAnswers
-                                                );
+                                                setImages(imagesData);
+                                                setUserAnswers(answersData);
                                                 setQuestionsMounted(true);
                                             }
                                         })
@@ -152,67 +164,60 @@ export default function ({ params }: { params: FinishedExamParms }) {
                             </div>
                             <div className="questions">
                                 {questionsMounted ? (
-                                    finishedExam.details.questions.map(
-                                        (question, index) => (
-                                            <Question
-                                                key={question._id}
-                                                examId={examId}
-                                                index={index + 1}
-                                                userAnswer={userAnswers.find(
-                                                    (a) =>
-                                                        a.question.row ===
-                                                        question.row
-                                                )}
-                                                content={
-                                                    questions.find(
-                                                        (q) =>
-                                                            q.row ===
-                                                            question.row
-                                                    )!
-                                                }
-                                                images={images.filter((img) => {
-                                                    let q = questions.find(
-                                                        (q) =>
-                                                            q.row ===
-                                                            question.row
-                                                    )!;
-                                                    let imgValues: number[] =
-                                                        [];
-                                                    if (q.question.isBoth) {
-                                                        imgValues.push(
-                                                            q.question.imgValue!
-                                                        );
-                                                    } else if (
-                                                        q.question.isImage
-                                                    ) {
-                                                        imgValues.push(
-                                                            q.question
-                                                                .value as number
-                                                        );
-                                                    }
-
-                                                    q.options
-                                                        .filter(
-                                                            (opt) => opt.isImage
-                                                        )
-                                                        .forEach((opt) => {
-                                                            imgValues.push(
-                                                                opt.value as number
-                                                            );
-                                                        });
-
-                                                    return (
-                                                        imgValues.includes(
-                                                            img.id
-                                                        ) ||
-                                                        imgValues.includes(
-                                                            img.bothId
-                                                        )
+                                    questions.map((question, index) => (
+                                        <Question
+                                            key={question._id}
+                                            examId={examId}
+                                            index={index + 1}
+                                            userAnswer={userAnswers.find(
+                                                (a) =>
+                                                    a.question.row ===
+                                                    question.row
+                                            )}
+                                            content={
+                                                questions.find(
+                                                    (q) =>
+                                                        q.row === question.row
+                                                )!
+                                            }
+                                            images={images.filter((img) => {
+                                                let q = questions.find(
+                                                    (q) =>
+                                                        q.row === question.row
+                                                )!;
+                                                let imgValues: number[] = [];
+                                                if (q.question.isBoth) {
+                                                    imgValues.push(
+                                                        q.question.imgValue!
                                                     );
-                                                })}
-                                            />
-                                        )
-                                    )
+                                                } else if (q.question.isImage) {
+                                                    imgValues.push(
+                                                        q.question
+                                                            .value as number
+                                                    );
+                                                }
+
+                                                q.options
+                                                    .filter(
+                                                        (opt) => opt.isImage
+                                                    )
+                                                    .forEach((opt) => {
+                                                        imgValues.push(
+                                                            opt.value as number
+                                                        );
+                                                    });
+
+                                                return (
+                                                    imgValues.includes(
+                                                        img.id
+                                                    ) ||
+                                                    imgValues.includes(
+                                                        img.bothId
+                                                    )
+                                                );
+                                            })}
+                                        />
+                                    ))
                                 ) : (
                                     <Loading />
                                 )}

@@ -1,4 +1,9 @@
-import { APIError, RedirectOptions } from "@/types/types";
+import {
+    APIError,
+    ExamQuestion,
+    QuestionType,
+    RedirectOptions,
+} from "@/types/types";
 import { AxiosResponse } from "axios";
 import { config } from "dotenv";
 import APIErrors from "@/errors/errors.json";
@@ -63,4 +68,37 @@ export const redirectToLogin = (options?: RedirectOptions) => {
             options && options.path ? options.path : window.location.pathname
         }`;
     }
+};
+
+export const isNumber = (value: string | number) => {
+    return !isNaN(Number(value.toString()));
+};
+
+export const seperateQuestions = (
+    questions: QuestionType[],
+    userAnswers: { question: ExamQuestion; index: number }[]
+) => {
+    let obj = { wrong: [], correct: [], empty: [] } as {
+        wrong: QuestionType[];
+        correct: QuestionType[];
+        empty: QuestionType[];
+    };
+
+    questions.forEach((question) => {
+        let userAnswer = userAnswers.find(
+            (ans) => ans.question.row === question.row
+        );
+
+        if (userAnswer) {
+            if (question.options[userAnswer.index].isCorrect) {
+                obj.correct.push(question);
+            } else {
+                obj.wrong.push(question);
+            }
+        } else {
+            obj.empty.push(question);
+        }
+    });
+
+    return obj;
 };

@@ -4,8 +4,8 @@ import Script from "next/script";
 import { GoogleTagManager } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
-    title: "UNEC | Examination",
-    description: "Examination is an examination system for UNEC students.",
+    title: "Examination",
+    description: "Examination system for students.",
     keywords: [
         "Examination",
         "UNEC",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         title: "Examination System",
         type: "website",
         url: "https://unec-examination.vercel.app",
-        description: "Examination system for UNEC students",
+        description: "Examination system for students",
         images: [
             {
                 url: "/Preview.png",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         site: "@SeonerVorteX",
         creator: "@SeonerVorteX",
         title: "Examination System",
-        description: "Examination system for UNEC students",
+        description: "Examination system for students",
         images: [
             {
                 url: "/Preview.png",

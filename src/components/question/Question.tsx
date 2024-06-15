@@ -29,7 +29,7 @@ export default function Question(props: QuestionProps) {
                             {content.question.isBoth ? (
                                 <div className="both">
                                     <p className="both-question-text">
-                                        {index}. {content.question.value}
+                                        {content.question.value}
                                     </p>
                                     <div className="question-image">
                                         <img
@@ -47,7 +47,6 @@ export default function Question(props: QuestionProps) {
                                 </div>
                             ) : content.question.isImage ? (
                                 <div className="question-image">
-                                    <h3>{index}.</h3>
                                     <img
                                         src={convertBufferToBase64Image(
                                             images.find(
@@ -61,7 +60,7 @@ export default function Question(props: QuestionProps) {
                                 </div>
                             ) : (
                                 <p className="question-text">
-                                    {index}. {content.question.value}
+                                    {content.question.value}
                                 </p>
                             )}
                         </div>

@@ -3,7 +3,7 @@
 import { APIError, ActiveExam, ImageType, QuestionType } from "@/types/types";
 import { useEffect, useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
-import { getErrors, redirectToLogin } from "@/utils";
+import { getErrors, isNumber, redirectToLogin } from "@/utils";
 import axios from "@/utils/axios";
 import Navbar from "@/components/navbar/Navbar";
 import Loading from "@/app/loading";
@@ -24,6 +24,8 @@ export default function ({ params }: { params: ActiveExamParms }) {
     const [showAnswers, setShowAnswers] = useState(false);
     const [showCurrentAnswer, setShowCurrentAnswer] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [switchValue, setSwitchValue] = useState<number>();
+    const [switchValid, setSwitchValid] = useState(true);
     const [answers, setAnswers] = useState<
         { question: number; index: number }[]
     >([]);
@@ -182,6 +184,29 @@ export default function ({ params }: { params: ActiveExamParms }) {
         btn.classList.add("disabled");
     };
 
+    const handleSwitcherChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let value = e.target.value;
+        let index = parseInt(value);
+
+        if (value === "") {
+            setSwitchValid(true);
+            setSwitchValue(undefined);
+        } else if (
+            !isNumber(value) ||
+            index < 1 ||
+            index > activeExam!.details.settings.questionCount
+        ) {
+            setSwitchValid(false);
+        } else {
+            setSwitchValid(true);
+            setSwitchValue(index);
+        }
+    };
+
+    const switchQuestion = () => {
+        if (switchValid && switchValue) setCurrentQuestion(switchValue);
+    };
+
     if (!mounted) {
         return <Loading />;
     } else {
@@ -240,6 +265,22 @@ export default function ({ params }: { params: ActiveExamParms }) {
                                 answers={answers}
                                 setAnswers={setAnswers}
                             />
+
+                            <div className="settings">
+                                <div className="question-row-search">
+                                    <input
+                                        className={switchValid ? "" : "invalid"}
+                                        type="text"
+                                        placeholder=""
+                                        onChange={handleSwitcherChange}
+                                    />
+                                    <p>
+                                        <a onClick={switchQuestion}>
+                                            nömrəli suala keç
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
 
                             <div className="buttons">
                                 <div className="arrows">

@@ -31,7 +31,6 @@ export default function ActiveQuestion(props: QuestionProps) {
             );
             answerList.push({ question: content.row, index: answer });
             setAnswers(answerList);
-            console.log(answerList);
         }
     }, [answer]);
 
@@ -39,7 +38,6 @@ export default function ActiveQuestion(props: QuestionProps) {
         let userAnswer = answers.find((ans) => ans.question === content.row);
 
         if (userAnswer) {
-            console.log(userAnswer.index);
             setAnswer(userAnswer.index);
         } else {
             setAnswer(-1);

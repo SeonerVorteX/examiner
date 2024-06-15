@@ -3,7 +3,7 @@
 import type { APIError, Exam } from "@/types/types";
 import { useEffect, useState } from "react";
 import axios from "@/utils/axios";
-import { getErrors, redirectToLogin } from "@/utils";
+import { getErrors, isNumber, redirectToLogin } from "@/utils";
 import { AxiosError, AxiosResponse } from "axios";
 import Loading from "@/app/loading";
 import Navbar from "@/components/navbar/Navbar";
@@ -21,6 +21,7 @@ export default function Exam({ params }: { params: ExamParms }) {
     const [endPoint, setEndPoint] = useState<string>();
     const [startPointValid, setStartPointValid] = useState<boolean>(true);
     const [endPointValid, setEndPointValid] = useState<boolean>(true);
+    const [equationValid, setEquationValid] = useState<boolean>(true);
     const [showAnswer, setShowAnswer] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(false);
     const [mounted, setMounted] = useState(false);
@@ -41,7 +42,7 @@ export default function Exam({ params }: { params: ExamParms }) {
                                 if (res.status === 200) {
                                     setExam(res.data);
                                     setEndPoint(res.data.questionCount);
-                                    document.title = `${res.data.title} - İmtahan`;
+                                    document.title = `${res.data.title} | Examination`;
                                     setMounted(true);
                                 }
                             })
@@ -65,7 +66,7 @@ export default function Exam({ params }: { params: ExamParms }) {
         if (e.target.name === "questionStart") {
             if (e.target.value) {
                 if (
-                    isNaN(parseInt(e.target.value)) ||
+                    !isNumber(e.target.value) ||
                     parseInt(e.target.value) < 1 ||
                     parseInt(e.target.value) > exam!.questionCount
                 ) {
@@ -78,7 +79,9 @@ export default function Exam({ params }: { params: ExamParms }) {
                         endPoint &&
                         parseInt(e.target.value) > parseInt(endPoint)
                     ) {
-                        setEndPointValid(false);
+                        setEquationValid(false);
+                    } else {
+                        setEquationValid(true);
                     }
                 }
             } else {
@@ -88,7 +91,7 @@ export default function Exam({ params }: { params: ExamParms }) {
         } else {
             if (e.target.value) {
                 if (
-                    isNaN(parseInt(e.target.value)) ||
+                    !isNumber(e.target.value) ||
                     parseInt(e.target.value) > exam!.questionCount
                 ) {
                     setEndPointValid(false);
@@ -96,6 +99,14 @@ export default function Exam({ params }: { params: ExamParms }) {
                 } else {
                     setEndPointValid(true);
                     setEndPoint(e.target.value);
+                    if (
+                        startPoint &&
+                        parseInt(e.target.value) < parseInt(startPoint)
+                    ) {
+                        setEquationValid(false);
+                    } else {
+                        setEquationValid(true);
+                    }
                 }
             } else {
                 setEndPoint(e.target.value);
@@ -105,7 +116,7 @@ export default function Exam({ params }: { params: ExamParms }) {
     };
 
     const startExam = () => {
-        if (startPointValid && endPointValid) {
+        if (startPointValid && endPointValid && equationValid) {
             let questionCount = 50;
 
             let btn = document.querySelector(".startExam") as HTMLButtonElement;
@@ -200,7 +211,8 @@ export default function Exam({ params }: { params: ExamParms }) {
                                                     type="text"
                                                     name="questionStart"
                                                     className={`qinput ${
-                                                        !startPointValid
+                                                        !startPointValid ||
+                                                        !equationValid
                                                             ? "invalid"
                                                             : ""
                                                     }`}
@@ -214,7 +226,8 @@ export default function Exam({ params }: { params: ExamParms }) {
                                                     type="text"
                                                     name="questionEnd"
                                                     className={`qinput ${
-                                                        !endPointValid
+                                                        !endPointValid ||
+                                                        !equationValid
                                                             ? "invalid"
                                                             : ""
                                                     }`}
@@ -244,7 +257,9 @@ export default function Exam({ params }: { params: ExamParms }) {
                                 <div className="exam-buttons">
                                     <button
                                         className={`startExam btn primary-btn ${
-                                            startPointValid && endPointValid
+                                            startPointValid &&
+                                            endPointValid &&
+                                            equationValid
                                                 ? ""
                                                 : "btn-invalid"
                                         }`}
