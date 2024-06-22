@@ -1,100 +1,65 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import Script from "next/script";
-import { GoogleTagManager } from "@next/third-parties/google";
+'use client';
 
-export const metadata: Metadata = {
-    title: "Examination",
-    description: "Examination system for students.",
-    keywords: [
-        "Examination",
-        "UNEC",
-        "ADIU",
-        "Semestr İmtahanı",
-        "Final İmahanı",
-        "Kollekvium İmtahanı",
-        "Midterm İmtahanı",
-    ],
-    authors: [{ name: "Mehdi Safarzade", url: "https://mehdisafarzade.dev" }],
-    metadataBase: new URL("https://unec-examination.vercel.app"),
-    openGraph: {
-        title: "Examination System",
-        type: "website",
-        url: "https://unec-examination.vercel.app",
-        description: "Examination system for students",
-        images: [
-            {
-                url: "/Preview.png",
-                width: 800,
-                height: 600,
-                alt: "Preview Image",
-            },
-        ],
-    },
-    twitter: {
-        card: "summary_large_image",
-        site: "@SeonerVorteX",
-        creator: "@SeonerVorteX",
-        title: "Examination System",
-        description: "Examination system for students",
-        images: [
-            {
-                url: "/Preview.png",
-                width: 800,
-                height: 600,
-                alt: "Preview Image",
-            },
-        ],
-    },
-};
+import './styles.css';
+import Main from '@/components/main/Main';
+import Navbar from '@/components/navbar/Navbar';
+import { useEffect, useState } from 'react';
+import Loader from './loading';
+import axios from '@/utils/axios';
+import CookieBanner from '@/components/cookie/CookieBanner';
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
-    return (
-        <html lang="az">
-            <head>
-                <script
-                    async
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9056907287164851"
-                    crossOrigin="anonymous"
-                ></script>
-            </head>
-            <body>{children}</body>
-            <GoogleTagManager
-                gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER!}
-            />
-            <Script>
-                {`
-                let cookies = localStorage.getItem("cookies");
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS!}');
+export default function HomePage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [useCookies, setUseCookies] = useState<boolean | null>(false);
+  const [consentVisible, setConsentVisible] = useState<boolean>(false);
+  const [secondMount, setSecondMount] = useState<boolean>(false);
+  const [mounted, setMounted] = useState(false);
 
-                if(cookies === true || cookies === "true") {
-                    gtag('consent', 'update', {
-                        'ad_storage': 'granted',
-                        'ad_user_data': 'granted',
-                        'ad_personalization': 'granted',
-                        'analytics_storage': 'granted'
-                    });
-                } else {
-                    gtag('consent', 'default', {
-                        'ad_storage': 'denied',
-                        'ad_user_data': 'denied',
-                        'ad_personalization': 'denied',
-                        'analytics_storage': 'denied'
-                    });
-                }
-            `}
-            </Script>
-            <Script
-                src={`https://www.googletagmanager.com/gtag/js?id=${process.env
-                    .NEXT_PUBLIC_GOOGLE_ANALYTICS!}`}
-            ></Script>
-        </html>
-    );
+  useEffect(() => {
+    setTimeout(() => {
+      setConsentVisible(true);
+    }, 1500);
+    setSecondMount(true);
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const cookies = localStorage.getItem('cookies') as boolean | null;
+    setUseCookies(cookies);
+
+    if (token) {
+      axios
+        .get('/@me/verifyToken')
+        .then((res) => {
+          if (res.status === 200) {
+            setIsAuthenticated(true);
+            setMounted(true);
+          }
+        })
+        .catch(() => {
+          setIsAuthenticated(false);
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          setMounted(true);
+        });
+    } else {
+      setMounted(true);
+    }
+  }, []);
+
+  if (!mounted || !secondMount) {
+    return <Loader />;
+  }
+
+  return (
+    <>
+      <Navbar props={{ isAuthenticated, setIsAuthenticated }} />
+      <Main props={{ isAuthenticated, setIsAuthenticated }} />
+      {useCookies === null ? (
+        <div className={`banner ${consentVisible ? 'visible' : ''}`}>
+          <CookieBanner />
+        </div>
+      ) : null}
+    </>
+  );
 }
