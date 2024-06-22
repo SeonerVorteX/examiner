@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import "./styles.css";
-import ExamCard from "./ExamCard";
-import { Exam, UserPayload } from "@/types/types";
-import Loading from "@/app/loading";
-import axios from "@/utils/axios";
-import Footer from "@/components/footer/Footer";
+import { useEffect, useState } from 'react';
+import './styles.css';
+import ExamCard from './ExamCard';
+import { Exam, UserPayload } from '@/types/types';
+import Loading from '@/app/loading';
+import axios from '@/utils/axios';
+import Footer from '@/components/footer/Footer';
 
 export default () => {
     const [exams, setExams] = useState<Exam[]>([]);
-    const [group, setGroup] = useState<string>("");
+    const [group, setGroup] = useState<string>('');
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        let user: UserPayload = JSON.parse(localStorage.getItem("user")!);
+        let user: UserPayload = JSON.parse(localStorage.getItem('user')!);
         setGroup(user.group);
 
         axios
-            .get("/exams/all")
+            .get('/exams/all')
             .then((res) => {
                 if (res.status === 200) {
                     setExams(res.data);
@@ -29,7 +29,11 @@ export default () => {
     }, []);
 
     if (!mounted) {
-        return <Loading />;
+        return (
+            <div className="container app">
+                <Loading />
+            </div>
+        );
     }
 
     return (
@@ -53,7 +57,7 @@ export default () => {
                 ) : (
                     <h3 className="no-exam">
                         Təəssüf ki, sizin aid olduğunuz qrup sistemdə
-                        aktivləşdirilməyib. Zəhmət olmasa starostanız{" "}
+                        aktivləşdirilməyib. Zəhmət olmasa starostanız{' '}
                         <a href="mailto:contact@mehdisafarzade.dev">
                             bizimlə əlaqə saxlasın
                         </a>

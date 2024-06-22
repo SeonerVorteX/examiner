@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
 
 :root {
     /* General */
     --max-width: 1300px;
-    --font-family: "Inter", sans-serif;
+    --font-family: 'Inter', sans-serif;
 
     /* Font Weights */
     --w-l: 300;
@@ -55,6 +55,8 @@ body {
 
 html {
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--black);
 }
 
 body {
@@ -157,18 +159,6 @@ a {
         opacity: 1;
         right: 2rem;
     }
-}
-
-::-webkit-scrollbar {
-    width: 0.6rem;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--black);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--primary);
 }
 
 @media (hover: hover) and (pointer: fine) {

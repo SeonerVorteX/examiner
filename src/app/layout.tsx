@@ -4,68 +4,70 @@ import Script from 'next/script';
 import { GoogleTagManager } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
-  title: 'Examination',
-  description: 'Examination system for students.',
-  keywords: [
-    'Examination',
-    'UNEC',
-    'ADIU',
-    'Semestr İmtahanı',
-    'Final İmahanı',
-    'Kollekvium İmtahanı',
-    'Midterm İmtahanı',
-  ],
-  authors: [{ name: 'Mehdi Safarzade', url: 'https://mehdisafarzade.dev' }],
-  metadataBase: new URL('https://unec-examination.vercel.app'),
-  openGraph: {
-    title: 'Examination System',
-    type: 'website',
-    url: 'https://unec-examination.vercel.app',
-    description: 'Examination system for students',
-    images: [
-      {
-        url: '/Preview.png',
-        width: 800,
-        height: 600,
-        alt: 'Preview Image',
-      },
+    title: 'Examination',
+    description: 'Examination system for students.',
+    keywords: [
+        'Examination',
+        'UNEC',
+        'ADIU',
+        'Semestr İmtahanı',
+        'Final İmahanı',
+        'Kollekvium İmtahanı',
+        'Midterm İmtahanı',
     ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@SeonerVorteX',
-    creator: '@SeonerVorteX',
-    title: 'Examination System',
-    description: 'Examination system for students',
-    images: [
-      {
-        url: '/Preview.png',
-        width: 800,
-        height: 600,
-        alt: 'Preview Image',
-      },
-    ],
-  },
+    authors: [{ name: 'Mehdi Safarzade', url: 'https://mehdisafarzade.dev' }],
+    metadataBase: new URL('https://unec-examination.vercel.app'),
+    openGraph: {
+        title: 'Examination System',
+        type: 'website',
+        url: 'https://unec-examination.vercel.app',
+        description: 'Examination system for students',
+        images: [
+            {
+                url: '/Preview.png',
+                width: 800,
+                height: 600,
+                alt: 'Preview Image',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        site: '@SeonerVorteX',
+        creator: '@SeonerVorteX',
+        title: 'Examination System',
+        description: 'Examination system for students',
+        images: [
+            {
+                url: '/Preview.png',
+                width: 800,
+                height: 600,
+                alt: 'Preview Image',
+            },
+        ],
+    },
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="az">
-      <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9056907287164851"
-          crossOrigin="anonymous"
-        ></script>
-      </head>
-      <body>{children}</body>
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER!} />
-      <Script>
-        {`
+    return (
+        <html lang="az">
+            <head>
+                <script
+                    async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9056907287164851"
+                    crossOrigin="anonymous"
+                ></script>
+            </head>
+            <body>{children}</body>
+            <GoogleTagManager
+                gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER!}
+            />
+            <Script>
+                {`
                 let cookies = localStorage.getItem("cookies");
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -88,11 +90,11 @@ export default function RootLayout({
                     });
                 }
             `}
-      </Script>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env
-          .NEXT_PUBLIC_GOOGLE_ANALYTICS!}`}
-      ></Script>
-    </html>
-  );
+            </Script>
+            <Script
+                src={`https://www.googletagmanager.com/gtag/js?id=${process.env
+                    .NEXT_PUBLIC_GOOGLE_ANALYTICS!}`}
+            ></Script>
+        </html>
+    );
 }
