@@ -20,7 +20,6 @@
 
 .exam-container {
     width: 100%;
-    min-height: 60vh;
     background-color: var(--tertiary);
     border: 2px solid var(--primary);
     border-radius: 0.6rem;
