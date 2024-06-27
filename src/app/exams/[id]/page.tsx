@@ -183,7 +183,7 @@ export default function Exam({ params }: { params: ExamParms }) {
                                         </tr>
                                         <tr>
                                             <td>İmtahan vaxtı</td>
-                                            <td>1 saat 30 dəqiqə</td>
+                                            <td>1 saat 20 dəqiqə</td>
                                         </tr>
                                         <tr>
                                             <td>Sual sayı</td>
