@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { APIError, ActiveExam, ImageType, QuestionType } from "@/types/types";
-import { useEffect, useState } from "react";
-import { AxiosError, AxiosResponse } from "axios";
-import { getErrors, isNumber, redirectToLogin } from "@/utils";
-import axios from "@/utils/axios";
-import Navbar from "@/components/navbar/Navbar";
-import Loading from "@/app/loading";
-import "./styles.css";
-import Question from "@/components/question/ActiveQuestion";
+import { APIError, ActiveExam, ImageType, QuestionType } from '@/types/types';
+import { useEffect, useState } from 'react';
+import { AxiosError, AxiosResponse } from 'axios';
+import { getErrors, isNumber, redirectToLogin } from '@/utils';
+import axios from '@/utils/axios';
+import Navbar from '@/components/navbar/Navbar';
+import Loading from '@/app/loading';
+import './styles.css';
+import Question from '@/components/question/ActiveQuestion';
 
 interface ActiveExamParms {
     id: string;
@@ -33,11 +33,11 @@ export default function ({ params }: { params: ActiveExamParms }) {
     const examId = params.id;
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
 
         if (token) {
             axios
-                .get("/@me/verifyToken")
+                .get('/@me/verifyToken')
                 .then((res) => {
                     if (res.status === 200) {
                         setIsAuthenticated(true);
@@ -90,41 +90,41 @@ export default function ({ params }: { params: ActiveExamParms }) {
         }
     }, []);
 
-    useEffect(() => {
-        if (answers.length > 0) {
-            axios
-                .post(`/exams/active/${examId}/answers`, { answers })
-                .catch(() => {});
-        }
-    }, [answers]);
+    // useEffect(() => {
+    //     if (answers.length > 0) {
+    //         axios
+    //             .post(`/exams/active/${examId}/answers`, { answers })
+    //             .catch(() => {});
+    //     }
+    // }, [answers]);
 
     useEffect(() => {
         if (showCurrentAnswer) {
             let btn = document.querySelector(
-                ".showAnswer"
+                '.showAnswer'
             ) as HTMLButtonElement;
             setShowCurrentAnswer(false);
-            btn.classList.remove("disabled");
+            btn.classList.remove('disabled');
         }
     }, [currentQuestion]);
 
     useEffect(() => {
         let executed = false;
 
-        document.addEventListener("keydown", (e) => {
+        document.addEventListener('keydown', (e) => {
             let leftBtn = document.querySelector(
-                ".left-arrow"
+                '.left-arrow'
             ) as HTMLButtonElement;
             let rightBtn = document.querySelector(
-                ".right-arrow"
+                '.right-arrow'
             ) as HTMLButtonElement;
 
-            if (e.key === "ArrowLeft") {
+            if (e.key === 'ArrowLeft') {
                 if (!leftBtn.disabled && !executed) {
                     leftBtn.click();
                     executed = true;
                 }
-            } else if (e.key === "ArrowRight") {
+            } else if (e.key === 'ArrowRight') {
                 if (!rightBtn.disabled && !executed) {
                     rightBtn.click();
                     executed = true;
@@ -132,17 +132,20 @@ export default function ({ params }: { params: ActiveExamParms }) {
             }
         });
 
-        document.addEventListener("keyup", () => {
+        document.addEventListener('keyup', () => {
             executed = false;
         });
     }, []);
 
-    const submit = (force?: boolean) => {
+    const submit = async (force?: boolean) => {
         if (force) {
-            let btn = document.querySelector(".submit") as HTMLButtonElement;
+            let btn = document.querySelector('.submit') as HTMLButtonElement;
             btn.disabled = true;
-            btn.classList.add("disabled");
+            btn.classList.add('disabled');
             setIsLoading(true);
+            await axios
+                .post(`/exams/active/${examId}/answers`, { answers })
+                .catch(() => {});
             axios
                 .get(`/exams/active/${examId}/finish`)
                 .then(() => {
@@ -153,11 +156,14 @@ export default function ({ params }: { params: ActiveExamParms }) {
                     setIsLoading(false);
                     btn.disabled = false;
                 });
-        } else if (confirm("İmtahanı bitirmək istədiyinizə əminsiniz mi?")) {
-            let btn = document.querySelector(".submit") as HTMLButtonElement;
+        } else if (confirm('İmtahanı bitirmək istədiyinizə əminsiniz mi?')) {
+            let btn = document.querySelector('.submit') as HTMLButtonElement;
             btn.disabled = true;
-            btn.classList.add("disabled");
+            btn.classList.add('disabled');
             setIsLoading(true);
+            await axios
+                .post(`/exams/active/${examId}/answers`, { answers })
+                .catch(() => {});
             axios
                 .get(`/exams/active/${examId}/finish`)
                 .then(() => {
@@ -174,21 +180,21 @@ export default function ({ params }: { params: ActiveExamParms }) {
 
     const timeOver = () => {
         submit(true);
-        alert("Vaxtınız bitdi!");
+        alert('Vaxtınız bitdi!');
         window.location.href = `/exams/finished/${examId}`;
     };
 
     const showAnswer = () => {
-        let btn = document.querySelector(".showAnswer") as HTMLButtonElement;
+        let btn = document.querySelector('.showAnswer') as HTMLButtonElement;
         setShowCurrentAnswer(true);
-        btn.classList.add("disabled");
+        btn.classList.add('disabled');
     };
 
     const handleSwitcherChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value;
         let index = parseInt(value);
 
-        if (value === "") {
+        if (value === '') {
             setSwitchValid(true);
             setSwitchValue(undefined);
         } else if (
@@ -269,7 +275,7 @@ export default function ({ params }: { params: ActiveExamParms }) {
                             <div className="settings">
                                 <div className="question-row-search">
                                     <input
-                                        className={switchValid ? "" : "invalid"}
+                                        className={switchValid ? '' : 'invalid'}
                                         type="text"
                                         placeholder=""
                                         onChange={handleSwitcherChange}
@@ -287,8 +293,8 @@ export default function ({ params }: { params: ActiveExamParms }) {
                                     <button
                                         className={`left-arrow btn primary-btn ${
                                             currentQuestion == 1
-                                                ? "disabled"
-                                                : ""
+                                                ? 'disabled'
+                                                : ''
                                         }`}
                                         onClick={() => {
                                             if (currentQuestion > 1) {
@@ -305,8 +311,8 @@ export default function ({ params }: { params: ActiveExamParms }) {
                                             currentQuestion ==
                                             activeExam.details.settings
                                                 .questionCount
-                                                ? "disabled"
-                                                : ""
+                                                ? 'disabled'
+                                                : ''
                                         }`}
                                         onClick={() => {
                                             if (
@@ -330,7 +336,7 @@ export default function ({ params }: { params: ActiveExamParms }) {
                                             className="btn primary-btn showAnswer"
                                             onClick={showAnswer}
                                         >
-                                            <i className="fa-solid fa-lock-open"></i>{" "}
+                                            <i className="fa-solid fa-lock-open"></i>{' '}
                                             Cavabı göstər
                                         </button>
                                     ) : (
@@ -344,7 +350,7 @@ export default function ({ params }: { params: ActiveExamParms }) {
                                             <span className="submit-btn-loader"></span>
                                         ) : (
                                             <>
-                                                <i className="fa-solid fa-pencil"></i>{" "}
+                                                <i className="fa-solid fa-pencil"></i>{' '}
                                                 Bitir
                                             </>
                                         )}
