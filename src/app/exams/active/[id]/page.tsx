@@ -90,13 +90,13 @@ export default function ({ params }: { params: ActiveExamParms }) {
         }
     }, []);
 
-    // useEffect(() => {
-    //     if (answers.length > 0) {
-    //         axios
-    //             .post(`/exams/active/${examId}/answers`, { answers })
-    //             .catch(() => {});
-    //     }
-    // }, [answers]);
+    useEffect(() => {
+        if (answers.length > 0) {
+            axios
+                .post(`/exams/active/${examId}/answers`, { answers })
+                .catch(() => {});
+        }
+    }, [answers]);
 
     useEffect(() => {
         if (showCurrentAnswer) {
@@ -137,15 +137,12 @@ export default function ({ params }: { params: ActiveExamParms }) {
         });
     }, []);
 
-    const submit = async (force?: boolean) => {
+    const submit = (force?: boolean) => {
         if (force) {
             let btn = document.querySelector('.submit') as HTMLButtonElement;
             btn.disabled = true;
             btn.classList.add('disabled');
             setIsLoading(true);
-            await axios
-                .post(`/exams/active/${examId}/answers`, { answers })
-                .catch(() => {});
             axios
                 .get(`/exams/active/${examId}/finish`)
                 .then(() => {
@@ -161,9 +158,6 @@ export default function ({ params }: { params: ActiveExamParms }) {
             btn.disabled = true;
             btn.classList.add('disabled');
             setIsLoading(true);
-            await axios
-                .post(`/exams/active/${examId}/answers`, { answers })
-                .catch(() => {});
             axios
                 .get(`/exams/active/${examId}/finish`)
                 .then(() => {
