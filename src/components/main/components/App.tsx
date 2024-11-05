@@ -55,13 +55,33 @@ export default () => {
                         ))}
                     </div>
                 ) : (
-                    <h3 className="no-exam">
-                        Təəssüf ki, sizin aid olduğunuz qrup sistemdə
-                        aktivləşdirilməyib. Zəhmət olmasa starostanız{' '}
-                        <a href="mailto:contact@mehdisafarzade.dev">
-                            bizimlə əlaqə saxlasın
-                        </a>
-                    </h3>
+                    <>
+                        <h3 className="no-exam">
+                            Təəssüf ki, sizin aid olduğunuz qrup sistemdə
+                            aktivləşdirilməyib. Zəhmət olmasa starostanız{' '}
+                            <a href="mailto:contact@mehdisafarzade.dev">
+                                bizimlə əlaqə saxlasın
+                            </a>
+                        </h3>
+
+                        <p className="no-exam-info">
+                            Qeyd: Bu sayt Üniversitetə məxsus deyil, sizin kimi
+                            İT oxuyan bir{' '}
+                            <a
+                                href="https://mehdisafarzade.dev/"
+                                target="_blank"
+                            >
+                                tələbə
+                            </a>{' '}
+                            tərəfindən hazırlanıb. Sizin hansı fənnlərdən
+                            imtahan verdiyinizin məlumatı bizə (yəni mənə)
+                            verilmir. Ona görə də sizə aid test imtahanlarının
+                            sistemə əlavə edilib aktivləşdirilməsi üçün bizimlə
+                            əlaqə saxlayın və əlaqə saxlayarkən zəhmət olmasa
+                            Whatsapp əlaqə nömrənizi də göndərdiyiniz maildə
+                            qeyd edin.
+                        </p>
+                    </>
                 )}
             </div>
             <Footer />
