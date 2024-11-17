@@ -65,7 +65,7 @@ export default () => {
                         </h3>
 
                         <p className="no-exam-info">
-                            Qeyd: Bu sayt Üniversitetə məxsus deyil, sizin kimi
+                            Qeyd: Bu sayt Universitetə məxsus deyil, sizin kimi
                             İT oxuyan bir{' '}
                             <a
                                 href="https://mehdisafarzade.dev/"
