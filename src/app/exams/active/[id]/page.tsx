@@ -92,9 +92,9 @@ export default function ({ params }: { params: ActiveExamParms }) {
 
     useEffect(() => {
         if (answers.length > 0) {
-            axios
-                .post(`/exams/active/${examId}/answers`, { answers })
-                .catch(() => {});
+            //axios
+                //.post(`/exams/active/${examId}/answers`, { answers })
+                //.catch(() => {});
         }
     }, [answers]);
 
