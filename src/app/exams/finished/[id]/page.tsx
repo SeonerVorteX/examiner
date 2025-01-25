@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import "./styles.css";
+import { useEffect, useState } from 'react';
+import './styles.css';
 import {
     APIError,
     ExamQuestion,
     FinishedExam,
     ImageType,
     QuestionType,
-} from "@/types/types";
-import axios from "@/utils/axios";
-import { AxiosError, AxiosResponse } from "axios";
-import { getErrors, redirectToLogin, seperateQuestions } from "@/utils";
-import Loading from "@/app/loading";
-import Navbar from "@/components/navbar/Navbar";
-import Question from "@/components/question/Question";
+} from '@/types/types';
+import axios from '@/utils/axios';
+import { AxiosError, AxiosResponse } from 'axios';
+import { getErrors, redirectToLogin, seperateQuestions } from '@/utils';
+import Loading from '@/app/loading';
+import Navbar from '@/components/navbar/Navbar';
+import Question from '@/components/question/Question';
 
 interface FinishedExamParms {
     id: string;
@@ -34,11 +34,11 @@ export default function ({ params }: { params: FinishedExamParms }) {
     const examId = params.id;
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
 
         if (token) {
             axios
-                .get("/@me/verifyToken")
+                .get('/@me/verifyToken')
                 .then((res) => {
                     if (res.status === 200) {
                         setIsAuthenticated(true);
@@ -148,12 +148,12 @@ export default function ({ params }: { params: FinishedExamParms }) {
                                     <div className="result">
                                         <h3>Nəticə</h3>
                                         <p>
-                                            {finishedExam.results.correctCount}{" "}
-                                            /{" "}
+                                            {finishedExam.results.correctCount}{' '}
+                                            /{' '}
                                             {
                                                 finishedExam.details.settings
                                                     .questionCount
-                                            }{" "}
+                                            }{' '}
                                             {`(${finishedExam.results.scorePercent}%)`}
                                         </p>
                                     </div>
@@ -186,34 +186,24 @@ export default function ({ params }: { params: FinishedExamParms }) {
                                                         q.row === question.row
                                                 )!;
                                                 let imgValues: number[] = [];
-                                                if (q.question.isBoth) {
+                                                if (q.question.imageId) {
                                                     imgValues.push(
-                                                        q.question.imgValue!
-                                                    );
-                                                } else if (q.question.isImage) {
-                                                    imgValues.push(
-                                                        q.question
-                                                            .value as number
+                                                        q.question.imageId
                                                     );
                                                 }
 
                                                 q.options
                                                     .filter(
-                                                        (opt) => opt.isImage
+                                                        (opt) => opt.imageId
                                                     )
                                                     .forEach((opt) => {
                                                         imgValues.push(
-                                                            opt.value as number
+                                                            opt.imageId
                                                         );
                                                     });
 
-                                                return (
-                                                    imgValues.includes(
-                                                        img.id
-                                                    ) ||
-                                                    imgValues.includes(
-                                                        img.bothId
-                                                    )
+                                                return imgValues.includes(
+                                                    img.id
                                                 );
                                             })}
                                         />

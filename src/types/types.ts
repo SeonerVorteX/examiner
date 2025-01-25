@@ -72,18 +72,16 @@ export interface QuestionType {
     _id: string;
     row: number;
     question: {
-        isImage: boolean;
-        isBoth: boolean;
-        imgValue?: number;
-        value: string | number;
+        imageId: number;
+        content: string | number;
     };
-    answers: OptionType;
+    // answers: OptionType;
     options: OptionType[];
 }
 
 export interface OptionType {
-    isImage: boolean;
-    value: string | number;
+    imageId: number;
+    content: string | number;
     _id: string;
     isCorrect?: boolean;
 }
@@ -91,10 +89,8 @@ export interface OptionType {
 export interface ImageType {
     _id: string;
     id: number;
-    type: number;
-    bothId: number;
     data: {
-        type: "Buffer";
+        type: 'Buffer';
         data: number[];
     };
 }

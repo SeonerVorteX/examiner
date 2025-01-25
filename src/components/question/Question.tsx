@@ -1,5 +1,5 @@
-import "./styles.css";
-import { ExamQuestion, ImageType, QuestionType } from "@/types/types";
+import './styles.css';
+import { ExamQuestion, ImageType, QuestionType } from '@/types/types';
 
 interface QuestionProps {
     examId: string;
@@ -16,7 +16,7 @@ export default function Question(props: QuestionProps) {
     const { content, images, index, userAnswer } = props;
 
     const convertBufferToBase64Image = (buffer: number[]) => {
-        const base64 = Buffer.from(buffer).toString("base64");
+        const base64 = Buffer.from(buffer).toString('base64');
         return `data:image/png;base64,${base64}`;
     };
 
@@ -26,43 +26,23 @@ export default function Question(props: QuestionProps) {
                 <>
                     <div className="content">
                         <div className="question-content">
-                            {content.question.isBoth ? (
-                                <div className="both">
-                                    <p className="both-question-text">
-                                        {content.question.value}
-                                    </p>
-                                    <div className="question-image">
-                                        <img
-                                            src={convertBufferToBase64Image(
-                                                images.find(
-                                                    (img) =>
-                                                        img.bothId ===
-                                                        content.question
-                                                            .imgValue
-                                                )!.data.data
-                                            )}
-                                            alt="Question"
-                                        />
-                                    </div>
-                                </div>
-                            ) : content.question.isImage ? (
+                            <p className="question-text">
+                                {index}) {content.question.content}
+                            </p>
+                            {content.question.imageId ? (
                                 <div className="question-image">
                                     <img
                                         src={convertBufferToBase64Image(
                                             images.find(
                                                 (img) =>
                                                     img.id ===
-                                                    content.question.value
+                                                    content.question.imageId
                                             )!.data.data
                                         )}
                                         alt="Question"
                                     />
                                 </div>
-                            ) : (
-                                <p className="question-text">
-                                    {content.question.value}
-                                </p>
-                            )}
+                            ) : null}
                         </div>
                         <div className="options">
                             <ul>
@@ -71,8 +51,8 @@ export default function Question(props: QuestionProps) {
                                         key={_index}
                                         className={`disableCursor ${
                                             option.isCorrect
-                                                ? "correct"
-                                                : "wrong"
+                                                ? 'correct'
+                                                : 'wrong'
                                         }`}
                                     >
                                         <input
@@ -91,20 +71,20 @@ export default function Question(props: QuestionProps) {
                                             htmlFor={option._id}
                                             className="disableCursor"
                                         >
-                                            {option.isImage ? (
+                                            {option.imageId ? (
                                                 <img
                                                     className="disableCursor option-image"
                                                     src={convertBufferToBase64Image(
                                                         images.find(
                                                             (img) =>
                                                                 img.id ===
-                                                                option.value
+                                                                option.imageId
                                                         )!.data.data
                                                     )}
                                                     alt="Option"
                                                 />
                                             ) : (
-                                                option.value
+                                                option.content
                                             )}
                                         </label>
                                     </li>

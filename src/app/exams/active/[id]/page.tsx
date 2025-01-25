@@ -243,24 +243,17 @@ export default function ({ params }: { params: ActiveExamParms }) {
                                             questions[currentQuestion - 1].row
                                     )!;
                                     let imgValues: number[] = [];
-                                    if (q.question.isBoth) {
-                                        imgValues.push(q.question.imgValue!);
-                                    } else if (q.question.isImage) {
-                                        imgValues.push(
-                                            q.question.value as number
-                                        );
+                                    if (q.question.imageId) {
+                                        imgValues.push(q.question.imageId);
                                     }
 
                                     q.options
-                                        .filter((opt) => opt.isImage)
+                                        .filter((opt) => opt.imageId)
                                         .forEach((opt) => {
-                                            imgValues.push(opt.value as number);
+                                            imgValues.push(opt.imageId);
                                         });
 
-                                    return (
-                                        imgValues.includes(img.id) ||
-                                        imgValues.includes(img.bothId)
-                                    );
+                                    return imgValues.includes(img.id);
                                 })}
                                 answers={answers}
                                 setAnswers={setAnswers}
