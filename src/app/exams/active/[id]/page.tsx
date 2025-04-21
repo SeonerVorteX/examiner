@@ -144,12 +144,6 @@ export default function ({ params }: { params: ActiveExamParms }) {
             btn.classList.add('disabled');
             setIsLoading(true);
 
-            if (answers.length > 0) {
-                await axios
-                    .post(`/exams/active/${examId}/answers`, { answers })
-                    .catch(() => {});
-            }
-
             axios
                 .get(`/exams/active/${examId}/finish`)
                 .then(() => {
@@ -165,6 +159,12 @@ export default function ({ params }: { params: ActiveExamParms }) {
             btn.disabled = true;
             btn.classList.add('disabled');
             setIsLoading(true);
+
+            if (answers.length > 0) {
+                await axios
+                    .post(`/exams/active/${examId}/answers`, { answers })
+                    .catch(() => {});
+            }
 
             axios
                 .get(`/exams/active/${examId}/finish`)
