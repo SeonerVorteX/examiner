@@ -90,13 +90,13 @@ export default function ({ params }: { params: ActiveExamParms }) {
         }
     }, []);
 
-    useEffect(() => {
-        if (answers.length > 0) {
-            axios
-                .post(`/exams/active/${examId}/answers`, { answers })
-                .catch(() => {});
-        }
-    }, [answers]);
+    // useEffect(() => {
+    //     if (answers.length > 0) {
+    //         axios
+    //             .post(`/exams/active/${examId}/answers`, { answers })
+    //             .catch(() => {});
+    //     }
+    // }, [answers]);
 
     useEffect(() => {
         if (showCurrentAnswer) {
@@ -159,6 +159,12 @@ export default function ({ params }: { params: ActiveExamParms }) {
             btn.disabled = true;
             btn.classList.add('disabled');
             setIsLoading(true);
+
+            if (answers.length > 0) {
+                await axios
+                    .post(`/exams/active/${examId}/answers`, { answers })
+                    .catch(() => {});
+            }
 
             axios
                 .get(`/exams/active/${examId}/finish`)
