@@ -1,7 +1,7 @@
-import Footer from "../footer/Footer";
-import App from "./components/App";
-import "./styles.css";
-import Image from "next/image";
+import Footer from '../footer/Footer';
+import App from './components/App';
+import './styles.css';
+import Image from 'next/image';
 
 interface MainProps {
     props: {
@@ -15,7 +15,7 @@ export default function Main({ props }: MainProps) {
 
     return (
         <main id="home">
-            {isAuthenticated ? (
+            {/* {isAuthenticated ? (
                 <App />
             ) : (
                 <>
@@ -37,7 +37,12 @@ export default function Main({ props }: MainProps) {
                     </div>
                     <Footer />
                 </>
-            )}
+            )} */}
+            <div className="container coming-soon">
+                <p>
+                    Coming soon! <br />
+                </p>
+            </div>
         </main>
     );
 }

@@ -46,6 +46,15 @@
     animation: fadeInLeft 0.5s forwards;
 }
 
+.coming-soon {
+    width: 100vw;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 @media (hover: hover) and (pointer: fine) {
     .notfound a:hover {
         text-decoration: underline;
