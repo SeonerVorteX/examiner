@@ -27,7 +27,7 @@ export default function Question(props: QuestionProps) {
                     <div className="content">
                         <div className="question-content">
                             <p className="question-text">
-                                {index}) {content.question.value}
+                                {index}) {content.question.content}
                             </p>
                             {content.question.imageId ? (
                                 <div className="question-image">
@@ -84,7 +84,7 @@ export default function Question(props: QuestionProps) {
                                                     alt="Option"
                                                 />
                                             ) : (
-                                                option.value
+                                                option.content
                                             )}
                                         </label>
                                     </li>
