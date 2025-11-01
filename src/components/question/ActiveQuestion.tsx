@@ -55,7 +55,7 @@ export default function ActiveQuestion(props: QuestionProps) {
                 <div className="content">
                     <div className="question-content">
                         <p className="question-text">
-                            {index}) {content.question.content}
+                            {index}) {content.question.value}
                         </p>
                         {content.question.imageId ? (
                             <div className="question-image">
@@ -127,7 +127,7 @@ export default function ActiveQuestion(props: QuestionProps) {
                                                 alt="Option"
                                             />
                                         ) : (
-                                            option.content
+                                            option.value
                                         )}
                                     </label>
                                 </li>

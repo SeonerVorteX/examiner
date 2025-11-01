@@ -73,7 +73,7 @@ export interface QuestionType {
     row: number;
     question: {
         imageId: number;
-        content: string | number;
+        value: string | number;
     };
     // answers: OptionType;
     options: OptionType[];
@@ -81,7 +81,7 @@ export interface QuestionType {
 
 export interface OptionType {
     imageId: number;
-    content: string | number;
+    value: string | number;
     _id: string;
     isCorrect?: boolean;
 }

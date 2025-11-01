@@ -53,13 +53,13 @@ export default function HomePage() {
 
     return (
         <>
-            {/* <Navbar props={{ isAuthenticated, setIsAuthenticated }} /> */}
+            <Navbar props={{ isAuthenticated, setIsAuthenticated }} />
             <Main props={{ isAuthenticated, setIsAuthenticated }} />
-            {/* {useCookies === null ? (
+            {useCookies === null ? (
         <div className={`banner ${consentVisible ? 'visible' : ''}`}>
           <CookieBanner />
         </div>
-      ) : null} */}
+      ) : null}
         </>
     );
 }

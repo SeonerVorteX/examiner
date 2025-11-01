@@ -65,21 +65,7 @@ export default () => {
                         </h3>
 
                         <p className="no-exam-info">
-                            Qeyd: Bu sayt Universitetə məxsus deyil, sizin kimi
-                            İT oxuyan bir{' '}
-                            <a
-                                href="https://mehdisafarzade.dev/"
-                                target="_blank"
-                            >
-                                tələbə
-                            </a>{' '}
-                            tərəfindən hazırlanıb. Sizin hansı fənnlərdən
-                            imtahan verdiyinizin məlumatı bizə (yəni mənə)
-                            verilmir. Ona görə də sizə aid test imtahanlarının
-                            sistemə əlavə edilib aktivləşdirilməsi üçün bizimlə
-                            əlaqə saxlayın və əlaqə saxlayarkən zəhmət olmasa
-                            Whatsapp əlaqə nömrənizi də göndərdiyiniz maildə
-                            qeyd edin.
+                            Qeyd: Hal-hazırda saytın yeni versiyası üzərində işləyirəm və plot versiyası demək olar ki hazırdır. Plot versiyasını elan edənədək köhnə sistemdən istifadə etmək istəyənlər mənimlə mail vasitəsilə əlaqə saxlaya bilərlər.
                         </p>
                     </>
                 )}
