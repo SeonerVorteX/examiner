@@ -16,11 +16,11 @@ export const metadata: Metadata = {
         'Midterm İmtahanı',
     ],
     authors: [{ name: 'Mehdi Safarzade', url: 'https://mehdisafarzade.dev' }],
-    metadataBase: new URL('https://unec-examination.vercel.app'),
+    metadataBase: new URL('https://examination.az'),
     openGraph: {
         title: 'Examination System',
         type: 'website',
-        url: 'https://unec-examination.vercel.app',
+        url: 'https://examination.az',
         description: 'Examination system for students',
         images: [
             {

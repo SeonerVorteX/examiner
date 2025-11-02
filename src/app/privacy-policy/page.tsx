@@ -135,11 +135,11 @@ export default function PrivacyPolicy() {
                             <p>
                                 <strong>Veb-sayt</strong> Examination-a aiddir,{" "}
                                 <a
-                                    href="https://unec-examination.vercel.app/"
+                                    href="https://examination.az/"
                                     rel="external nofollow noopener"
                                     target="_blank"
                                 >
-                                    https://unec-examination.vercel.app/
+                                    https://examination.az/
                                 </a>{" "}
                                 ünvanından daxil olmaq mümkündür.
                             </p>

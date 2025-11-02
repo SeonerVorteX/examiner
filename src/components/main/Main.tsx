@@ -11,7 +11,7 @@ interface MainProps {
 }
 
 export default function Main({ props }: MainProps) {
-    const { isAuthenticated, setIsAuthenticated } = props;
+    const { isAuthenticated } = props;
 
     return (
         <main id="home">
@@ -31,7 +31,7 @@ export default function Main({ props }: MainProps) {
                                     unoptimized
                                 />
                             </div>
-                            <h2>UNEC İmtahan Programı</h2>
+                            <h2>İmtahan Programı</h2>
                             <p>İmtahan verə bilmək üçün öncə giriş edin</p>
                         </div>
                     </div>
