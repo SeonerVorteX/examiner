@@ -7,6 +7,10 @@
         "az": "İstifadəçi adı və ya şifrə yanlışdır.",
         "en": "Username or password is incorrect."
     },
+    "10105": {
+        "az": "Təəssüf ki, kabinetinizdə hansı qrupa aid olduğunuz qeyd olunmayıb. Xahiş edirik, saytın qurucusu ilə əlaqə saxlayın.",
+        "en": "Unfortunately, your group is not specified in your account. Please contact the site administrator."
+    },
     "10203": {
         "az": "Hal hazırda sadəcə 560-1 və 560-2 qruplarında oxuyan tələbələr imtahanlardan istifadə edə bilər.",
         "en": "Currently only students studying in groups 560-1 and 560-2 can take exams."
