@@ -56,10 +56,10 @@ export default function HomePage() {
             <Navbar props={{ isAuthenticated, setIsAuthenticated }} />
             <Main props={{ isAuthenticated, setIsAuthenticated }} />
             {useCookies === null ? (
-        <div className={`banner ${consentVisible ? 'visible' : ''}`}>
-          <CookieBanner />
-        </div>
-      ) : null}
+                <div className={`banner ${consentVisible ? 'visible' : ''}`}>
+                    <CookieBanner />
+                </div>
+            ) : null}
         </>
     );
 }

@@ -10,6 +10,7 @@ import APIErrors from "@/errors/errors.json";
 config();
 
 const API_URL = process.env.API_URL!;
+export const NEW_APP_URL = process.env.NEW_APP_URL!;
 
 export const API = (path?: string): string => {
     return path ? API_URL + path : API_URL;
